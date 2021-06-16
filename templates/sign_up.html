@@ -1,10 +1,14 @@
-<!DOCTYPE html>
-<html>
-    <head>
+{% extends "base.html" %}
+{% block Title %}Signup -{% endblock %}
 
-    </head>
-    <body>
-        <p>This is the signup page</p>
-    </body>
-
-</html>
+{% block content %}
+    <h1>Signup</h1>
+    <form>
+        <input type="text" placeholder="Enter Username"><br>
+        <input type="email" placeholder="Enter Email"><br>
+        <input type="password" placeholder="Enter Password"><br>
+        <input type="password" placeholder="Confirm Password"><br>
+        <br>
+        <input type="submit">
+    </form>
+{% endblock %}

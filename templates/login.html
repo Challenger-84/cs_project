@@ -1,23 +1,12 @@
-<!DOCTYPE html>
-<html>
-    <head>
-    <title>Login</title>
-    </head>
-    <body>
-        <p>This is the login page</p>
-        <form>
-            <label>
-                Username
-            </label><br>
-            <input type="text"><br>
-            <label>
-                Password
-            </label><br>
-            <input type="password"><br>
-            <input type="submit">
-        </form>
-        
-        
+{% extends "base.html" %}
+{% block Title %}Login -{% endblock %}
 
-    </body>
-</html>
+{% block content %}
+    <h1>Login</h1>
+    <form>
+        <input type="text" placeholder="Enter Username"><br>
+        <input type="password" placeholder="Enter Password"><br>
+        <input type="submit">
+        <br>
+    </form>
+{% endblock %}

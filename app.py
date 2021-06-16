@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask,render_template, url_for
 from flask_mysqldb import MySQL
 
 app = Flask(__name__)
@@ -10,10 +10,9 @@ app.config['MYSQL_DB'] = 'freedbtech_CsProject'
 
 
 @app.route('/')
-def hello_world():  
-   return render_template('index.html')
+def home():  
+   return render_template('index.html', login_link=url_for('login'), signup_link = url_for('signup') )
 
-@app.route('/')
 @app.route('/login')
 def login():
     return render_template('login.html')

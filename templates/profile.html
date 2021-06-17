@@ -3,6 +3,17 @@
 
 {% block content %}
 <h1>Hello {{user}}</h1>
+
+<h5>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                {{ message }}
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+</h5>
+
 <br>
 <a href="{{ homepage_link }}"> Home < </a> 
 {% endblock %}

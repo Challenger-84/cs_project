@@ -4,6 +4,16 @@
 <h1>SSE Boutique</h1>
 <p>Welcome customer!</p>
 
+<h5>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                {{ message }}
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+</h5>
+
 <a href={{signup_link}}>
     <input type="button" value="Signup">
 </a><br>
@@ -11,4 +21,11 @@
 <a href={{login_link}}>
     <input type="button" value="Login">
 </a>
+<br>
+<br>
+{% if is_loggedin %}
+    <a href={{logout_link}}>
+        <input type="button" value="Logout">
+    </a>
+{% endif %}
 {% endblock %}

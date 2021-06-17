@@ -6,3 +6,19 @@ body {
 h1{
     color:whitesmoke;
 }
+
+h5 {
+    color: red;
+}
+
+a:link {
+    color: cyan;
+}
+
+a:visited{
+    color: pink;
+}
+
+p{
+    color: white;
+}

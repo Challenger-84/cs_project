@@ -2,9 +2,10 @@
 {% block Title %}Login -{% endblock %}
 
 {% block content %}
+    <a href="{{ homepage_link }}"> Go Back < </a> 
     <h1>Login</h1>
-    <form>
-        <input type="text" placeholder="Enter Username"><br>
+    <form action='#' method='post'>
+        <input type="text" placeholder="Enter Username" name='username'><br>
         <input type="password" placeholder="Enter Password"><br>
         <input type="submit">
         <br>

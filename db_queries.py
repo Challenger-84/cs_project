@@ -4,12 +4,10 @@ def add_user(conn: mysql.connection, username,
                 email, password, account_tpye):
     """Adds a new user to the table 'users'"""
     cursor = conn.cursor() 
-    query = f'INSERT INTO users (username, email, password, accounttype) VALUES ("{username}", "{email}", "{password}", "{account_tpye}")'
-    print(query)
+    query = f'INSERT INTO users (username, email, password, account_type) VALUES ("{username}", "{email}", "{password}", "{account_tpye}")'
     cursor.execute(query)
     conn.commit()
 
-    print('addded')
 
 def view_all_users(conn: mysql.connection):
     cursor = conn.cursor()
@@ -24,14 +22,12 @@ def if_user(conn: mysql.connection, username):
     cursor.execute(query)
     
     output = cursor.fetchone()
-    print(output)
     return output
 
-def password_auth(conn: mysql.connection, username, password):
-    cursor = conn.cursor()
+def password_hash_returner(conn: mysql.connection, username, password):
+    cursor = conn.cursor(buffered=True)
     query = f'SELECT password FROM users WHERE username="{username}"'
     cursor.execute(query)
 
     output = cursor.fetchone()
-    print(output)
-    return password == output[0]
+    return output[0]

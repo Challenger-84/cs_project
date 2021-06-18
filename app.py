@@ -1,20 +1,19 @@
-import re
 from flask import Flask,render_template, url_for, redirect, request, session, flash
 from flask_mysql_connector import MySQL
+from werkzeug.security import generate_password_hash, check_password_hash
 
-from db_queries import add_user, view_all_users, if_user, password_auth
+
+from db_queries import add_user, view_all_users, if_user, password_hash_returner
 
 app = Flask(__name__)
 
 # Setting up config var for mysql
-app.config['MYSQL_USER'] = 'freedbtech_Eshwar'
-app.config['MYSQL_HOST'] = 'freedb.tech'
-app.config['MYSQL_DATABASE'] = 'freedbtech_CsProject'
-app.config['MYSQL_PASSWORD'] = 'csproject'
+app.config['MYSQL_USER'] = 'sql6419760'
+app.config['MYSQL_HOST'] = 'sql6.freesqldatabase.com'
+app.config['MYSQL_DATABASE'] = 'sql6419760'
+app.config['MYSQL_PASSWORD'] = 'Y7xYSrHExL'
 app.config['MYSQL_PORT'] = '3306'
 mysql = MySQL(app)
-
-test_query = 'DELETE FROM users WHERE userid=1'
 
 # seckret key dont leak :)
 app.secret_key = "Veryvery secret key :). ha"
@@ -40,13 +39,18 @@ def login():
         password = request.form['password']
 
         conn = mysql.connection
-
-        if if_user(conn, username) and password_auth(conn, username=username, password=password):
-            session['username'] = username
-            flash('Successfully logged in!', 'info')
-            return redirect(url_for('profile'))
+        if if_user(conn, username):
+            password_hash = password_hash_returner(conn, username, password)
+            print(password_hash, password)
+            if check_password_hash(password_hash, password):
+                session['username'] = username
+                flash('Successfully logged in!', 'info')
+                return redirect(url_for('profile'))
+            else:
+                flash('Please check your username and password.', 'info')
+                return redirect(url_for('login'))
         else:
-            flash('Please check your username and password.', 'info')
+            flash("Account doesn't exist", 'info')
             return render_template('login.html',
                     homepage_link = url_for('home')
                 )
@@ -71,13 +75,17 @@ def signup():
         conn = mysql.connection
         if not if_user(conn, username):
             if password == confirm_pass:
-                add_user(conn, username, email, password, 'user')
+                password_hash = generate_password_hash(password)
+                print(password_hash)
+                add_user(conn, username, email, password_hash, 'user')
+
                 session['username'] = username
+
                 flash('Successfully created the account', 'info')
                 return redirect(url_for('profile'))
             else:
                 flash('Passwords do not match')
-                redirect(url_for('signup'))
+                return redirect(url_for('signup'))
         else:
             flash('Username already exists', 'info')
             return redirect(url_for('signup'))
@@ -109,7 +117,9 @@ def profile():
 def dbtest():
     conn = mysql.connection 
     
-    return str(view_all_users(conn))
+    output = view_all_users(conn)
+
+    return str(output)
 
 if __name__ == '__main__':
    app.run(debug=True)

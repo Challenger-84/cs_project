@@ -29,6 +29,7 @@ def home():
             login_link = url_for('login'),
             signup_link = url_for('signup'), 
             logout_link = url_for('logout'),
+            profile_link = url_for('profile'),
             is_loggedin = is_loggedin
         )
 

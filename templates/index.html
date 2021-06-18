@@ -14,16 +14,19 @@
     {% endwith %}
 </h5>
 
-<a href={{signup_link}}>
-    <input type="button" value="Signup">
-</a><br>
-<br>
-<a href={{login_link}}>
-    <input type="button" value="Login">
-</a>
-<br>
-<br>
-{% if is_loggedin %}
+{% if not is_loggedin %}
+    <a href={{signup_link}}>
+        <input type="button" value="Signup">
+    </a><br>
+    <br>
+    <a href={{login_link}}>
+        <input type="button" value="Login">
+    </a>
+{% else %}
+    <a href={{profile_link}}>
+        <input type="button" value="Profile">
+    </a><br>
+    <br>
     <a href={{logout_link}}>
         <input type="button" value="Logout">
     </a>

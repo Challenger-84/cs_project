@@ -1,0 +1,27 @@
+.navbar {
+    text-align: left;
+}
+
+body {
+    background-color:#454341; 
+    color: white;
+    text-align: center;
+    font-family:sans-serif
+}
+
+h5 {
+    color: tomato;
+    font-size: 16px;
+}
+
+a:link {
+    color: lightblue;
+}
+
+a:visited{
+    color: lightblue;
+}
+
+input{
+    margin: 5px;
+}

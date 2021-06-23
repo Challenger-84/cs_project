@@ -6,12 +6,12 @@ body {
     background-color:#454341; 
     color: white;
     text-align: center;
-    font-family:sans-serif
+    font-family:sans-serif ;
 }
 
 h5 {
     color: tomato;
-    font-size: 16px;
+    font-size: 15px;
 }
 
 a:link {

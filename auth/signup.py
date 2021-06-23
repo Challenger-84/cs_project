@@ -18,26 +18,31 @@ def signup():
         confirm_pass = request.form['confirm password']
 
         conn = mysql.connection
-        if not if_user(conn, username):
-            if password == confirm_pass:
-                password_hash = generate_password_hash(password)
-                print(password_hash)
-                add_user(conn, username, email, password_hash, 'user')
-
-                session.permanent = True
-                session['username'] = username
-
-                flash('Successfully created the account', 'info')
-                conn.close()
-                return redirect(url_for('profile'))
-            else:
-                flash('Passwords do not match')
-                conn.close()
-                return redirect(url_for('signup'))
+        flash_message = ""
+        if not username:
+            flash_message = "Username is not filled"
+        elif if_user(conn, username):
+            flash_message = "Username already exists"
+        elif not password:
+            flash_message = "Password is not filled"
+        elif password != confirm_pass:
+            flash_message = "Passwords do not match"
         else:
-            flash('Username already exists', 'info')
+            password_hash = generate_password_hash(password)
+            print(password_hash)
+            add_user(conn, username, email, password_hash, 'user')
+
+            session.permanent = True
+            session['username'] = username
+
+            flash('Successfully created the account', 'info')
             conn.close()
-            return redirect(url_for('signup'))
+            return redirect(url_for('profile'))
+        
+        if flash_message:
+            flash(flash_message, 'info')
+            conn.close()
+            return redirect(url_for('signup.signup'))
 
     else:
         return render_template('sign_up.html', 

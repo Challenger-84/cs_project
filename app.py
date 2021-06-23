@@ -58,6 +58,7 @@ def dbtest():
     
     output = view_all_users(conn)
 
+    conn.close()
     return str(output)
 
 if __name__ == '__main__':

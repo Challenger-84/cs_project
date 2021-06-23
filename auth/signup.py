@@ -28,12 +28,15 @@ def signup():
                 session['username'] = username
 
                 flash('Successfully created the account', 'info')
+                conn.close()
                 return redirect(url_for('profile'))
             else:
                 flash('Passwords do not match')
+                conn.close()
                 return redirect(url_for('signup'))
         else:
             flash('Username already exists', 'info')
+            conn.close()
             return redirect(url_for('signup'))
 
     else:

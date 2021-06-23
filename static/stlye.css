@@ -1,24 +1,23 @@
 body {
     background-color:#454341; 
+    color: white;
     text-align: center;
-}
-
-h1{
-    color:whitesmoke;
+    font-family:sans-serif
 }
 
 h5 {
-    color: red;
+    color: tomato;
+    font-size: 16px;
 }
 
 a:link {
-    color: cyan;
+    color: lightblue;
 }
 
 a:visited{
-    color: pink;
+    color: lightblue;
 }
 
-p{
-    color: white;
+input{
+    margin: 5px;
 }

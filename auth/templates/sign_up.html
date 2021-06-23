@@ -1,25 +1,35 @@
 {% extends "base.html" %}
+
+{% block stylesheet %}
+<link rel='stylesheet' type="text/css" href="{{ url_for('static', filename='auth_pages_style.css')}}">
+{% endblock %}
 {% block Title %}Signup -{% endblock %}
 
 {% block content %}
-    <a href="{{ homepage_link }}"> Go Back < </a> 
+    <div class='navbar'>
+        <a href="{{ homepage_link }}"> 
+            <img src="static/images/home_icon.png" alt = 'Go Back <' width= 50> 
+        </a>
+    </div>
 
-    <h1>Signup</h1>
-    <h5>
-        {% with messages = get_flashed_messages() %}
-            {% if messages %}
-                {% for message in messages %}
-                    {{ message }}
-                {% endfor %}
-            {% endif %}
-        {% endwith %}
-    </h5>
-    <form action='#' method='post'>
-        <input type="text" name="username" placeholder="Enter Username" ><br>
-        <input type="email" name="email" placeholder="Enter Email" ><br>
-        <input type="password" name="password" placeholder="Enter Password"><br>
-        <input type="password" name="confirm password" placeholder="Confirm Password"><br>
-        <br>
-        <input type="submit">
-    </form>
+    <div class="LoginSignup">
+        <h1>Signup</h1>
+        
+        <form action='#' method='post'>
+            <input type="text" name="username" placeholder="Enter Username" ><br>
+            <input type="email" name="email" placeholder="Enter Email" ><br>
+            <input type="password" name="password" placeholder="Enter Password"><br>
+            <input type="password" name="confirm password" placeholder="Confirm Password"><br>
+            <h5>
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        {% for message in messages %}
+                            {{ message }}
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+            </h5>
+            <input type="submit">
+        </form>
+    </div>
 {% endblock %}

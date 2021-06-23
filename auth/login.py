@@ -24,12 +24,15 @@ def login():
                 session.permanent = True
                 session['username'] = username
                 flash('Successfully logged in!', 'info')
+                conn.close()
                 return redirect(url_for('profile'))
             else:
                 flash('Please check your username and password.', 'info')
+                conn.close()
                 return redirect(url_for('login'))
         else:
             flash("Account doesn't exist", 'info')
+            conn.close()
             return redirect(url_for('login'))
     else:
         if 'username' in session:

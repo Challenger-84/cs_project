@@ -21,3 +21,6 @@ a:visited{
 input{
     margin: 5px;
 }
+.navbar {
+    text-align: left;
+}

@@ -27,8 +27,10 @@ app.config['mysql'] = mysql
 # seckret key dont leak :)
 app.secret_key = "Veryvery secret key :). ha"
 
+# Setting how long a permanent session lasts
 app.permanent_session_lifetime = timedelta(minutes=10)
 
+# HomePage
 @app.route('/')
 def home():
     if 'username' in session:
@@ -46,12 +48,16 @@ def home():
 
 @app.route('/profile')
 def profile():
+    """User's Profile page"""
+
+    # Checking if the user is logged in
     if 'username' in session:
         username = session['username']
         return render_template('profile.html', user=username, homepage_link=url_for('home'))
     else:
         return redirect(url_for('login'))
 
+# Only admins :)
 @app.route('/dbtest')
 def dbtest():
     conn = mysql.connection 

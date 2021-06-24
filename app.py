@@ -11,6 +11,7 @@ from db_queries import view_all_users
 
 app = Flask(__name__)
 
+# Registering the blueprinta
 app.register_blueprint(login_blueprint)
 app.register_blueprint(signup_blueprint)
 

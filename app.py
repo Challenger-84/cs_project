@@ -20,6 +20,7 @@ app.register_blueprint(signup_blueprint)
 app.config['MYSQL_USER'] = 'YWQGp9IZmI'
 app.config['MYSQL_HOST'] = 'remotemysql.com'
 app.config['MYSQL_DATABASE'] = 'YWQGp9IZmI'
+print(os.getenv('MYSQL_PASSWORD'))
 app.config['MYSQL_PASSWORD'] = os.getenv('MYSQL_PASSWORD')
 app.config['MYSQL_PORT'] = '3306'
 mysql = MySQL(app)

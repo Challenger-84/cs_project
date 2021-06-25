@@ -2,6 +2,7 @@ from flask import Flask,render_template, url_for, redirect, session
 from flask_mysql_connector import MySQL
 
 from datetime import timedelta
+import os
 
 # Importing blueprints
 from auth.login import login_blueprint
@@ -16,17 +17,17 @@ app.register_blueprint(login_blueprint)
 app.register_blueprint(signup_blueprint)
 
 # Setting up config var for mysql
-app.config['MYSQL_USER'] = 'sql6419760'
-app.config['MYSQL_HOST'] = 'sql6.freesqldatabase.com'
-app.config['MYSQL_DATABASE'] = 'sql6419760'
-app.config['MYSQL_PASSWORD'] = 'Y7xYSrHExL'
+app.config['MYSQL_USER'] = 'YWQGp9IZmI'
+app.config['MYSQL_HOST'] = 'remotemysql.com'
+app.config['MYSQL_DATABASE'] = 'YWQGp9IZmI'
+app.config['MYSQL_PASSWORD'] = os.getenv('MYSQL_PASSWORD')
 app.config['MYSQL_PORT'] = '3306'
 mysql = MySQL(app)
 
 app.config['mysql'] = mysql
 
 # seckret key dont leak :)
-app.secret_key = "Veryvery secret key :). ha"
+app.secret_key = os.getenv('SECRET_KEY')
 
 # Setting how long a permanent session lasts
 app.permanent_session_lifetime = timedelta(minutes=10)

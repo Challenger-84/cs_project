@@ -37,6 +37,7 @@ def signup():
 
             # Hashing the password before storing it in out database
             password_hash = generate_password_hash(password)
+            print(len(password_hash))
 
             # Adds the data to the db
             add_user(conn, username, email, password_hash, 'user')

@@ -20,15 +20,14 @@ app.register_blueprint(signup_blueprint)
 app.config['MYSQL_USER'] = 'YWQGp9IZmI'
 app.config['MYSQL_HOST'] = 'remotemysql.com'
 app.config['MYSQL_DATABASE'] = 'YWQGp9IZmI'
-print(os.environ['MYSQL_PASSWORD'])
-app.config['MYSQL_PASSWORD'] = os.environ['MYSQL_PASSWORD']
+app.config['MYSQL_PASSWORD'] = os.getenv('MYSQL_PASSWORD')
 app.config['MYSQL_PORT'] = '3306'
 mysql = MySQL(app)
 
 app.config['mysql'] = mysql
 
 # seckret key dont leak :)
-app.secret_key = os.environ['SECRET_KEY']
+app.secret_key = os.getenv('SECRET_KEY')
 
 # Setting how long a permanent session lasts
 app.permanent_session_lifetime = timedelta(minutes=10)

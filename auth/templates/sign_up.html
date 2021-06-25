@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block stylesheet %}
-<link rel='stylesheet' type="text/css" href="{{ url_for('static', filename='auth_pages_style.css')}}">
+<link rel='stylesheet' type="text/css" href="{{ url_for('static', filename='stlye.css')}}">
 {% endblock %}
 {% block Title %}Signup -{% endblock %}
 
@@ -29,7 +29,7 @@
                     {% endif %}
                 {% endwith %}
             </h5>
-            <input type="submit">
+            <input type="submit" class="button">
         </form>
     </div>
 {% endblock %}

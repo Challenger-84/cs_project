@@ -20,7 +20,21 @@ a:visited{
 
 input{
     margin: 5px;
+    transition: 100ms;
 }
 .navbar {
     text-align: left;
+}
+.button{
+    background-color: inherit;
+    color: whitesmoke;
+    border: 2px solid whitesmoke;
+    padding: 5px 16px;
+    font-size: 14px;
+    border-radius: 10px;
+}
+
+.button:hover{
+    background-color: whitesmoke;
+    color: black;
 }

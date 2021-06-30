@@ -10,6 +10,21 @@
     </head>
     <body>
         {% block content %}
+        <div class='navbar'>
+            <a href="{{ homepage_link }}"> 
+                <img src="static/images/home_icon.png" alt = 'Go Back <' width= 50> 
+            </a>
+            <a href="">
+                <img src="" alt="Admin Page">
+            </a>
+            <form action='#' method='POST'>
+                <input type="text" placeholder="Search..." name="Search">
+            </form>
+            <a href="">
+                <img src="" alt="Profile Page">
+            </a>
+            
+    </div>
         {% endblock %}
     </body>
 </html>

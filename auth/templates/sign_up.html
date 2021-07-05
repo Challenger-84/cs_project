@@ -21,7 +21,7 @@
             <input type="email" name="email" placeholder="Enter Email" ><br>
             <input type="password" name="password" placeholder="Enter Password"><br>
             <input type="password" name="confirm password" placeholder="Confirm Password"><br>
-            <h5>
+            <h5 id=flash_msg>
                 {% with messages = get_flashed_messages() %}
                     {% if messages %}
                         {% for message in messages %}

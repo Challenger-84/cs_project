@@ -6,11 +6,6 @@ body {
     margin: 0;
 }
 
-h5 {
-    color: tomato;
-    font-size: 15px;
-}
-
 a:link {
     color: lightblue;
 }
@@ -23,23 +18,11 @@ input{
     margin: 5px;
     transition: 100ms;
 }
-ul{
-    background-color:#292727;
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
+
+#flash_msg {
+    color: tomato;
 }
-li{
-    float: left;
-}
-li a{
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-}
+
 .button{
     background-color: inherit;
     color: whitesmoke;
@@ -47,6 +30,7 @@ li a{
     padding: 5px 16px;
     font-size: 14px;
     border-radius: 10px;
+    margin-top: 5px;
 }
 
 .button:hover{
@@ -54,6 +38,23 @@ li a{
     color: black;
 }
 
+.navbar{
+    background-color:#292727;
+    list-style-type: none;
+    margin: 0;
+    padding: 0px;
+    overflow: hidden;
+}
+ul.navbar > li {
+    float: left;
+}
+ul.navbar a{
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
 #searchbox{
     padding: 5px 16px;
     margin-top: 20px;

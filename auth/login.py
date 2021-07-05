@@ -37,12 +37,12 @@ def login():
                 # Flashing a message if there is a error in the input
                 flash('Please check your username and password.', 'info')
                 conn.close()
-                return redirect(url_for('login'))
+                return redirect(url_for('login.login'))
         else:
             # Flashing a message is there is no account with the inputed username
             flash("Account doesn't exist", 'info')
             conn.close()
-            return redirect(url_for('login'))
+            return redirect(url_for('login.login'))
 
     # If the request method is GET (ie The user opened the webpage)
     else:

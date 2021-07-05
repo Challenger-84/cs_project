@@ -6,7 +6,7 @@
 {% block content %}
 <h1>Hello {{user}}</h1>
 
-<h5>
+<h5 id=flash_msg>
     {% with messages = get_flashed_messages() %}
         {% if messages %}
             {% for message in messages %}

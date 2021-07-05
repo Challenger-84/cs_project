@@ -1,3 +1,4 @@
+from auth.signup import signup
 from flask import Blueprint , request, session, flash, redirect, render_template, url_for, current_app
 from flask_mysql_connector import MySQL
 from werkzeug.security import check_password_hash
@@ -50,9 +51,11 @@ def login():
             flash('Already logged in.', 'info')
             return redirect(url_for('profile'))
         else:
+            print(url_for('signup.signup'))
             # If not we show the login page
             return render_template('login.html',
-                    homepage_link = url_for('home')
+                    homepage_link = url_for('home'),
+                    signup_link = url_for('signup.signup')
                 )
 
 @login_blueprint.route('/logout')

@@ -4,12 +4,6 @@
 {% block stylesheet %}<link rel='stylesheet' type="text/css" href="{{ url_for('static', filename='stlye.css')}}">{% endblock %}
 
 {% block content %}
-<div class='navbar'>
-    <a href="{{ homepage_link }}"> 
-        <img src="static/images/home_icon.png" alt = 'Go Back <' width= 50> 
-    </a>
-</div>
-
 <h1>Hello {{user}}</h1>
 
 <h5>

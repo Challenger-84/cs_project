@@ -3,7 +3,34 @@
 {% block stylesheet %}<link rel='stylesheet' type="text/css" href="{{ url_for('static', filename='stlye.css')}}">{% endblock %}
 {% block Title %}Homepage -{% endblock %}
 
+{% block navbar_buttons %}
+{% if not is_loggedin %}
+    <li>
+        <a href={{signup_link}}>
+            <input class="button" type="button" value="Signup">
+        </a>
+    </li>
+    <li>
+        <a href={{login_link}}>
+            <input class="button" type="button" value="Login">
+        </a>
+    </li>
+{% else %}
+    <li>
+        <a href={{profile_link}}>
+            <input class="button" type="button" value="Profile">
+        </a>
+    </li>
+    <li>
+        <a href={{logout_link}}>
+            <input class="button" type="button" value="Logout">
+        </a>
+    </li>
+{% endif %}
+{% endblock %}
+
 {% block content %}
+
 <h1>SSE Boutique</h1>
 <p>Welcome customer!</p>
 
@@ -16,22 +43,4 @@
         {% endif %}
     {% endwith %}
 </h5>
-
-{% if not is_loggedin %}
-    <a href={{signup_link}}>
-        <input class="button" type="button" value="Signup">
-    </a><br>
-    <br>
-    <a href={{login_link}}>
-        <input class="button" type="button" value="Login">
-    </a>
-{% else %}
-    <a href={{profile_link}}>
-        <input class="button" type="button" value="Profile">
-    </a><br>
-    <br>
-    <a href={{logout_link}}>
-        <input class="button" type="button" value="Logout">
-    </a>
-{% endif %}
 {% endblock %}

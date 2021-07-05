@@ -9,22 +9,31 @@
         <title>{% block Title %}{% endblock %} SSE Boutique</title>
     </head>
     <body>
+        <ul>
+            <li>    
+                <a href="{{ homepage_link }}"> 
+                    <img style="margin-top: 10px;" src="static/images/home_icon.png" alt = 'Go Back <' width= 25> 
+                </a>
+            </li>
+            <li>
+                <form action='#' method='POST'>
+                    <input id="searchbox" type="text" placeholder="Search..." name="Search">
+                </form>
+            </li>
+            {% block navbar_buttons %}
+            <li>
+                <a href="">
+                    <input class="button" type="button" value="Admin Page">
+                </a>
+            </li>
+            <li>
+                <a href="">
+                    <input class="button" type="button" value="Profile Page">
+                </a>
+            </li>
+            {% endblock %}
+        </ul>
         {% block content %}
-        <div class='navbar'>
-            <a href="{{ homepage_link }}"> 
-                <img src="static/images/home_icon.png" alt = 'Go Back <' width= 50> 
-            </a>
-            <a href="">
-                <img src="" alt="Admin Page">
-            </a>
-            <form action='#' method='POST'>
-                <input type="text" placeholder="Search..." name="Search">
-            </form>
-            <a href="">
-                <img src="" alt="Profile Page">
-            </a>
-            
-    </div>
         {% endblock %}
     </body>
 </html>

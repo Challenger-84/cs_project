@@ -5,13 +5,15 @@
 {% endblock %}
 {% block Title %}Login -{% endblock %}
 
-{% block content %}
-    <div class='navbar'>
-        <a href="{{ homepage_link }}"> 
-            <img src="static/images/home_icon.png" alt = 'Go Back <' width= 50> 
+{% block navbar_buttons %}
+    <li>
+        <a href={{signup_link}}>
+            <input class="button" type="button" value="Signup">
         </a>
-    </div>
+    </li>
+{% endblock %}
 
+{% block content %}
     <div>
         <h1>Login</h1>
         <form action='#' method='post'>

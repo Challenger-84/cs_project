@@ -1,8 +1,9 @@
 body {
-    background-color:#454341; 
+    background-color:black; 
     color: white;
     text-align: center;
-    font-family:sans-serif
+    font-family:sans-serif;
+    margin: 0;
 }
 
 h5 {
@@ -22,8 +23,22 @@ input{
     margin: 5px;
     transition: 100ms;
 }
-.navbar {
-    text-align: left;
+ul{
+    background-color:#292727;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+li{
+    float: left;
+}
+li a{
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
 }
 .button{
     background-color: inherit;
@@ -37,4 +52,11 @@ input{
 .button:hover{
     background-color: whitesmoke;
     color: black;
+}
+
+#searchbox{
+    padding: 5px 16px;
+    margin-top: 20px;
+    border-radius: 10px;
+    font-size: 14px;
 }

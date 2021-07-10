@@ -7,6 +7,7 @@ import os
 # Importing blueprints
 from auth.login import login_blueprint
 from auth.signup import signup_blueprint
+from admin.admin import admin_blueprint
 
 from db_queries import view_all_users
 
@@ -15,6 +16,7 @@ app = Flask(__name__)
 # Registering the blueprinta
 app.register_blueprint(login_blueprint)
 app.register_blueprint(signup_blueprint)
+app.register_blueprint(admin_blueprint)
 
 # Setting up config var for mysql
 app.config['MYSQL_USER'] = 'YWQGp9IZmI'

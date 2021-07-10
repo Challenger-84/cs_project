@@ -3,6 +3,14 @@
 {% block stylesheet %}<link rel='stylesheet' type="text/css" href="{{ url_for('static', filename='stlye.css')}}">{% endblock %}
 {% block Title %}Admin Page -{% endblock %}
 
+{% block navbar_buttons %}
+    <li>
+        <a href={{profile_link}}>
+            <input class="button" type="button" value="Profile">
+        </a>
+    </li>
+{% endblock %}
+
 {% block content %}
     <h2>Enter the Values to Search</h2>
     <form>

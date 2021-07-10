@@ -47,6 +47,7 @@ def home():
             signup_link = url_for('signup.signup'), 
             logout_link = url_for('login.logout'),
             profile_link = url_for('profile'),
+            admin_link = url_for('admin.admin'),
             is_loggedin = is_loggedin
         )
 
@@ -57,9 +58,11 @@ def profile():
     # Checking if the user is logged in
     if 'username' in session:
         username = session['username']
-        return render_template('profile.html', user=username, homepage_link=url_for('home'))
+        return render_template('profile.html', user=username,
+                             homepage_link=url_for('home'), 
+                             admin_link = url_for('admin.admin'))
     else:
-        return redirect(url_for('login'))
+        return redirect(url_for('login.login'))
 
 # Only admins :)
 @app.route('/dbtest')

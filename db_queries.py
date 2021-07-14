@@ -32,5 +32,8 @@ def password_hash_returner(conn: mysql.connection, username, password):
     output = cursor.fetchone()
     return output[0]
 
-def add_dress(conn: mysql.connection):
-    pass
+def add_values(conn:mysql.connection,username,password):
+    cursor=conn.cursor()
+    query=f'INSERT INTO dress(dressid,name,description,img_url,price,stock)VALUES("{dressid}",{name}","{img_url}","{price}","{stock}")'
+    cursor.execute(query)
+    conn.commit()

@@ -1,5 +1,6 @@
 from flask import Flask,render_template, url_for, redirect, session
 from flask_mysql_connector import MySQL
+import mysql.connector
 
 from datetime import timedelta
 import os
@@ -19,12 +20,14 @@ app.register_blueprint(signup_blueprint)
 app.register_blueprint(admin_blueprint)
 
 # Setting up config var for mysql
-app.config['MYSQL_USER'] = 'YWQGp9IZmI'
-app.config['MYSQL_HOST'] = 'remotemysql.com'
-app.config['MYSQL_DATABASE'] = 'YWQGp9IZmI'
-app.config['MYSQL_PASSWORD'] = os.getenv('MYSQL_PASSWORD')
-app.config['MYSQL_PORT'] = '3306'
-mysql = MySQL(app)
+# app.config['MYSQL_USER'] = os.getenv('MYSQL_USER')
+# app.config['MYSQL_HOST'] = os.getenv('MYQSL_HOST')
+# print(os.getenv('MYSQL_PASSWORD'))
+# app.config['MYSQL_DATABASE'] = os.getenv('MYSQL_DB')
+# app.config['MYSQL_PASSWORD'] = os.getenv('MYSQL_PASSWORD')
+# mysql = MySQL(app)
+
+mysql = mysql.connector.connect(user=os.getenv("MYSQL_USER"), password=os.getenv('MYSQL_PASSWORD'), database=os.getenv("MYSQL_DB"))
 
 app.config['mysql'] = mysql
 

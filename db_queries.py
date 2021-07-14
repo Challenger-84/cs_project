@@ -31,3 +31,6 @@ def password_hash_returner(conn: mysql.connection, username, password):
 
     output = cursor.fetchone()
     return output[0]
+
+def add_dress(conn: mysql.connection):
+    pass

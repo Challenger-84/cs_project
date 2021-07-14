@@ -4,7 +4,7 @@ def add_user(conn: mysql.connection, username,
                 email, password, account_tpye):
     """Adds a new user to the table 'users'"""
     cursor = conn.cursor() 
-    query = f'INSERT INTO users (username, email, password, user_type) VALUES ("{username}", "{email}", "{password}", "{account_tpye}")'
+    query = f'INSERT INTO users (username, email, password, account_type) VALUES ("{username}", "{email}", "{password}", "{account_tpye}")'
     cursor.execute(query)
     conn.commit()
 

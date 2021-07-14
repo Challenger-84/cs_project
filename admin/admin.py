@@ -6,4 +6,9 @@ admin_blueprint = Blueprint('admin', __name__, template_folder='templates', stat
 def admin():
     return render_template('admin.html',
                             homepage_link = url_for('home') ,
-                            profile_link = url_for('profile'))
+                            profile_link = url_for('profile'),
+                            addnewdress_link = url_for('admin.addnewdress'))
+
+@admin_blueprint.route('/admin/addnewdress')
+def addnewdress():
+    return render_template('addnewdress.html')

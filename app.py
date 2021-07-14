@@ -21,13 +21,11 @@ app.register_blueprint(admin_blueprint)
 
 # Setting up config var for mysql
 app.config['MYSQL_USER'] = os.getenv('MYSQL_USER')
-app.config['MYSQL_HOST'] = os.getenv('MYQSL_HOST')
+app.config['MYSQL_HOST'] = "eu-cdbr-west-01.cleardb.com"
 print(os.getenv('MYSQL_PASSWORD'))
 app.config['MYSQL_DATABASE'] = os.getenv('MYSQL_DB')
 app.config['MYSQL_PASSWORD'] = os.getenv('MYSQL_PASSWORD')
 mysql = MySQL(app)
-
-# mysql = mysql.connector.connect(host=os.getenv('MYSQL_HOST'), user=os.getenv("MYSQL_USER"), password=os.getenv('MYSQL_PASSWORD'), database=os.getenv("MYSQL_DB"))
 
 app.config['mysql'] = mysql
 
@@ -70,7 +68,7 @@ def profile():
 # Only admins :)
 @app.route('/dbtest')
 def dbtest():
-    conn = mysql.connection 
+    conn = mysql.connection
     
     output = view_all_users(conn)
 

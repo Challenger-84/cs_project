@@ -38,7 +38,7 @@ app.permanent_session_lifetime = timedelta(minutes=10)
 @app.route('/')
 def home():
     if 'username' in session:
-        is_loggedin = True
+        is_loggedin = True  
     else:
         is_loggedin = False
 

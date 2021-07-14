@@ -1,6 +1,6 @@
 body {
-    background-color: whitesmoke;
-    color: black;
+    background-color: #3a424a;
+    color: white;
     text-align: center;
     font-family:sans-serif;
     margin: 0;
@@ -25,8 +25,8 @@ input{
 
 .button{
     background-color: inherit;
-    color: black;
-    border: 2px solid black;
+    color: white;
+    border: 2px solid white;
     padding: 5px 16px;
     font-size: 14px;
     border-radius: 10px;
@@ -34,12 +34,12 @@ input{
 }
 
 .button:hover{
-    background-color: black;
-    color: white;
+    background-color: white;
+    color: black;
 }
 
 .navbar{
-    background-color:blue;
+    background-color:#1b1f24;
     list-style-type: none;
     margin: 0;
     padding: 0px;

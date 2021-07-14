@@ -37,3 +37,13 @@ def add_values(conn:mysql.connection,name,img_url, price, stock):
     query=f'INSERT INTO dress(name,description,img_url,price,stock)VALUES({name}","{img_url}","{price}","{stock}")'
     cursor.execute(query)
     conn.commit()
+
+def see_all_dress(conn:mysql.connection):
+    cursor=conn.cursor()
+    cursor.execute("SELECT * from dress;")
+
+    output=cursor.fetchall()
+    return output
+
+
+    

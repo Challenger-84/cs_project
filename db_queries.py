@@ -45,9 +45,9 @@ def see_all_dress(conn:mysql.connection):
     output=cursor.fetchall()
     return output
 
-def update_user_account(conn:mysql.connection,username,password):
+def update_user_account(conn:mysql.connection, userid, username, new_account_type):
     cursor=conn.cursor()
-    query='UPDATE users SET account_type="{username}","{password}")where userid={userid} and username={username})'
+    query=f'UPDATE users SET account_type="{new_account_type}" where userid="{userid}" and username="{username}"'
     cursor.execute(query)
     conn.commit()
 

@@ -3,4 +3,24 @@
 {% block Title %}View all dress{% endblock %}
 
 {% block content %}
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Dress Name</th>
+            <th>Description</th>
+            <th>Image Url</th>
+            <th>Price</th>
+            <th>Stock</th>
+        </tr>
+        {% for dress in dresses %}
+        <tr>
+            <td> {{dress[0]}}</td>
+            <td> {{dress[1]}}</td>
+            <td> {{dress[2]}}</td>
+            <td> {{dress[3]}}</td>
+            <td> {{dress[4]}}</td>
+            <td> {{dress[5]}}</td>
+        </tr>
+        {% endfor %}
+    </table>
 {% endblock %}

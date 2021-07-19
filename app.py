@@ -10,7 +10,7 @@ from auth.login import login_blueprint
 from auth.signup import signup_blueprint
 from admin.admin import admin_blueprint
 
-from db_queries import view_all_users
+from db_queries import see_all_dress, view_all_users
 
 app = Flask(__name__)
 
@@ -61,7 +61,8 @@ def profile():
         username = session['username']
         return render_template('profile.html', user=username,
                              homepage_link=url_for('home'), 
-                             admin_link = url_for('admin.admin'))
+                             admin_link = url_for('admin.admin'), 
+                             logout_link = url_for('login.logout'))
     else:
         return redirect(url_for('login.login'))
 
@@ -70,7 +71,7 @@ def profile():
 def dbtest():
     conn = mysql.connection
     
-    output = view_all_users(conn)
+    output = see_all_dress(conn)
 
     conn.close()
     return str(output)

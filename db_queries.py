@@ -38,7 +38,7 @@ def add_dress(conn:mysql.connection,name,description,img_url, price, stock):
     cursor.execute(query)
     conn.commit()
 
-def see_all_dress(conn:mysql.connection):
+def view_all_dress(conn:mysql.connection):
     cursor=conn.cursor()
     cursor.execute("SELECT * from dress;")
 

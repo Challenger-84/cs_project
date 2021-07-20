@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, url_for, request, flash, redirect, current_app
-from db_queries import add_dress, see_all_dress
+from db_queries import add_dress, view_all_dress, view_all_users
 
 admin_blueprint = Blueprint('admin', __name__, template_folder='templates', static_folder='static', url_prefix='/admin')
 
@@ -9,7 +9,7 @@ def admin():
     return render_template('admin.html',
                             homepage_link = url_for('home') ,
                             profile_link = url_for('profile'),
-                            addnewdress_link = url_for('admin.viewAllDress'))
+                            addnewdress_link = url_for('admin.viewallusers'))
 
 @admin_blueprint.route('/addnewdress', methods=['GET', 'POST'])
 def addnewdress():
@@ -35,12 +35,23 @@ def addnewdress():
         return render_template('addnewdress.html')
 
 @admin_blueprint.route('/viewalldress')
-def viewAllDress():
+def viewalldress():
 
     mysql = current_app.config['mysql']
     conn = mysql.connection
-    dresses = see_all_dress(conn)
+    dresses = view_all_dress(conn)
     print(dresses)
     conn.close
     return render_template('viewalldress.html', 
                             dresses = dresses)
+
+@admin_blueprint.route('/viewallusers')
+def viewallusers():
+
+    mysql = current_app.config['mysql']
+    conn = mysql.connection
+
+    users = view_all_users(conn)
+
+    return render_template('viewallusers.html',
+                            users = users)

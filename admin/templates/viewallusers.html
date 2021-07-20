@@ -1,0 +1,22 @@
+{% extends "admin_ibase.html" %}
+
+{% block Title %}View all dress{% endblock %}
+
+{% block content %}
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Username</th>
+            <th>email</th>
+            <th>Account Type</th>
+        </tr>
+        {% for user in users %}
+        <tr>
+            <td> {{user[0]}}</td>
+            <td> {{user[1]}}</td>
+            <td> {{user[2]}}</td>
+            <td> {{user[4]}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

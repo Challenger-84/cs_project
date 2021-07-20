@@ -10,7 +10,7 @@ from auth.login import login_blueprint
 from auth.signup import signup_blueprint
 from admin.admin import admin_blueprint
 
-from db_queries import see_all_dress, view_all_users
+from db_queries import view_all_users
 
 app = Flask(__name__)
 
@@ -71,7 +71,7 @@ def profile():
 def dbtest():
     conn = mysql.connection
     
-    output = see_all_dress(conn)
+    output = view_all_users(conn)
 
     conn.close()
     return str(output)

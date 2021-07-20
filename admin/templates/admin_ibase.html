@@ -10,6 +10,28 @@
         <title>{% block Title %}{% endblock %}</title>
     </head>
     <body>
+        <ul class=navbar>
+            <li>    
+                <a href="{{ add_dress_link }}"> 
+                    <input class="button" type="button" value="Add Dress">
+                </a>
+            </li>
+            <li>
+                <a href="{{ view_dress_link }}">
+                    <input class="button" type="button" value="View Dresses">
+                </a>
+            </li>
+            <li>
+                <a href="{{ view_user_link }}">
+                    <input class="button" type="button" value="View Users">
+                </a>
+            </li>
+            <li>
+                <a href="{{ aaaa }}">
+                    <input class="button" type="button" value="aa">
+                </a>
+            </li>
+        </ul>
         {% block content %}
         {% endblock %}
     </body>

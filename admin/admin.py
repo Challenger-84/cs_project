@@ -9,7 +9,7 @@ def admin():
     return render_template('admin.html',
                             homepage_link = url_for('home') ,
                             profile_link = url_for('profile'),
-                            addnewdress_link = url_for('admin.viewallusers'))
+                            addnewdress_link = url_for('admin.addnewdress'))
 
 @admin_blueprint.route('/addnewdress', methods=['GET', 'POST'])
 def addnewdress():
@@ -32,7 +32,10 @@ def addnewdress():
         flash("Dress added to the store database.")
         return redirect(url_for('admin.addnewdress'))
     else:
-        return render_template('addnewdress.html')
+        return render_template('addnewdress.html',
+                                add_dress_link = url_for('admin.addnewdress'),
+                                view_dress_link = url_for('admin.viewalldress'),
+                                view_user_link= url_for('admin.viewallusers'))
 
 @admin_blueprint.route('/viewalldress')
 def viewalldress():
@@ -43,7 +46,10 @@ def viewalldress():
     print(dresses)
     conn.close
     return render_template('viewalldress.html', 
-                            dresses = dresses)
+                            dresses = dresses,
+                            add_dress_link = url_for('admin.addnewdress'),
+                            view_dress_link = url_for('admin.viewalldress'),
+                            view_user_link= url_for('admin.viewallusers'))
 
 @admin_blueprint.route('/viewallusers')
 def viewallusers():
@@ -54,4 +60,7 @@ def viewallusers():
     users = view_all_users(conn)
 
     return render_template('viewallusers.html',
-                            users = users)
+                            users = users, 
+                            add_dress_link = url_for('admin.addnewdress'),
+                            view_dress_link = url_for('admin.viewalldress'),
+                            view_user_link= url_for('admin.viewallusers'))

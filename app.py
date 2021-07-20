@@ -61,7 +61,9 @@ def profile():
 
     # Checking if the user is logged in
     if 'username' in session:
+        conn = mysql.connection
         username = session['username']
+        session['user_type'] = login_info_returner(conn, username)[1]
         return render_template('profile.html', user=username,
                              homepage_link=url_for('home'), 
                              admin_link = url_for('admin.admin'), 

@@ -39,11 +39,15 @@ app.permanent_session_lifetime = timedelta(minutes=10)
 @app.route('/')
 def home():
     if 'username' in session:
-        conn = mysql.connection
         is_loggedin = True
-        session['user_type'] = login_info_returner(conn, session['username'])[1]
     else:
         is_loggedin = False
+
+    if 'user_type' in session:
+        is_admin = session['user_type'] == 'admin'
+    else:
+        is_admin = False
+        session['user_type'] = False
 
     return render_template('index.html', 
             login_link = url_for('login.login'),
@@ -52,7 +56,7 @@ def home():
             profile_link = url_for('profile'),
             admin_link = url_for('admin.admin'),
             is_loggedin = is_loggedin,
-            is_admin = session['user_type'] == 'admin'
+            is_admin = is_admin
         )
 
 @app.route('/profile')
@@ -61,14 +65,18 @@ def profile():
 
     # Checking if the user is logged in
     if 'username' in session:
-        conn = mysql.connection
         username = session['username']
-        session['user_type'] = login_info_returner(conn, username)[1]
+
+        if 'user_tpye' in session:
+            is_admin = session['user_type'] == 'admin'
+        else:
+            is_admin = False
+
         return render_template('profile.html', user=username,
                              homepage_link=url_for('home'), 
                              admin_link = url_for('admin.admin'), 
                              logout_link = url_for('login.logout'),
-                             isadmin = session['user_type'] == 'admin')
+                             isadmin = is_admin)
     else:
         return redirect(url_for('login.login'))
 

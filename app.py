@@ -47,7 +47,7 @@ def home():
         is_admin = session['user_type'] == 'admin'
     else:
         is_admin = False
-        session['user_type'] = False
+        session['user_type'] = 'user'
 
     return render_template('index.html', 
             login_link = url_for('login.login'),
@@ -67,7 +67,7 @@ def profile():
     if 'username' in session:
         username = session['username']
 
-        if 'user_tpye' in session:
+        if 'user_type' in session:
             is_admin = session['user_type'] == 'admin'
         else:
             is_admin = False

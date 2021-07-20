@@ -24,6 +24,7 @@ def login():
         conn = mysql.connection
 
         login_info = login_info_returner(conn, username)
+        print(login_info)
         # Checking if the user exists in our database
         if if_user(conn, username):
             password_hash = login_info[0] # Password hash 
@@ -33,6 +34,7 @@ def login():
                 session.permanent = True
                 session['username'] = username
                 session['user_type'] = login_info[1] # account type
+                print(session['user_type'])
                 flash('Successfully logged in!', 'info')
                 conn.close()
                 return redirect(url_for('profile'))

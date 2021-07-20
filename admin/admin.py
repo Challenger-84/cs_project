@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, url_for, request, flash, redirect, current_app
+from flask import Blueprint, render_template, url_for, request, flash, redirect, current_app, session
 from db_queries import add_dress, view_all_dress, view_all_users
 
 admin_blueprint = Blueprint('admin', __name__, template_folder='templates', static_folder='static', url_prefix='/admin')
@@ -6,10 +6,14 @@ admin_blueprint = Blueprint('admin', __name__, template_folder='templates', stat
 
 @admin_blueprint.route('/')
 def admin():
-    return render_template('admin.html',
-                            homepage_link = url_for('home') ,
-                            profile_link = url_for('profile'),
-                            addnewdress_link = url_for('admin.addnewdress'))
+    if session['user_type'] == 'admin':
+        return render_template('admin.html',
+                                homepage_link = url_for('home') ,
+                                profile_link = url_for('profile'),
+                                addnewdress_link = url_for('admin.addnewdress'))
+    else:
+        flash('You do not have permission to access this')
+        return redirect(url_for('profile'))
 
 @admin_blueprint.route('/addnewdress', methods=['GET', 'POST'])
 def addnewdress():

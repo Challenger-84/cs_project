@@ -44,6 +44,7 @@ def signup():
             # Creating the session
             session.permanent = True
             session['username'] = username
+            session['user_type'] = 'user'
 
             flash('Successfully created the account', 'info')
             conn.close()

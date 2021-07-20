@@ -21,11 +21,13 @@
             <input class="button" type="button" value="Profile">
         </a>
     </li>
+    {% if isadmin %}
     <li>
         <a href={{admin_link}}>
             <input class="button" type="button" value="Admin Page">
         </a>
     </li>
+    {% endif %}
     <li>
         <a href={{logout_link}}>
             <input class="button" type="button" value="Logout">

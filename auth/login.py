@@ -3,7 +3,7 @@ from flask import Blueprint , request, session, flash, redirect, render_template
 from flask_mysql_connector import MySQL
 from werkzeug.security import check_password_hash
 
-from db_queries import if_user, password_hash_returner
+from db_queries import if_user, login_info_returner
 
 
 login_blueprint = Blueprint('login', __name__, template_folder="templates", static_folder="static")
@@ -22,14 +22,17 @@ def login():
         password = request.form['password']
 
         conn = mysql.connection
+
+        login_info = login_info_returner(conn, username)
         # Checking if the user exists in our database
         if if_user(conn, username):
-            password_hash = password_hash_returner(conn, username, password)
+            password_hash = login_info[0] # Password hash 
             # Checking if the password is correct
             if check_password_hash(password_hash, password):
                 # Logging in the user if the checks are passed
                 session.permanent = True
                 session['username'] = username
+                session['user_type'] = login_info[1] # account type
                 flash('Successfully logged in!', 'info')
                 conn.close()
                 return redirect(url_for('profile'))

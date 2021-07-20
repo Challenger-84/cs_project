@@ -4,11 +4,13 @@
 {% block stylesheet %}<link rel='stylesheet' type="text/css" href="{{ url_for('static', filename='stlye.css')}}">{% endblock %}
 
 {% block navbar_buttons %}
+    {% if isadmin %}
     <li>
         <a href={{admin_link}}>
             <input class="button" type="button" value="Admin Page">
         </a>
     </li>
+    {% endif %}
     <li>
         <a href={{logout_link}}>
             <input class="button" type="button" value="Logout">

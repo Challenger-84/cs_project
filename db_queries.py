@@ -24,13 +24,13 @@ def if_user(conn: mysql.connection, username):
     output = cursor.fetchone()
     return output
 
-def password_hash_returner(conn: mysql.connection, username, password):
+def login_info_returner(conn: mysql.connection, username):
     cursor = conn.cursor(buffered=True)
-    query = f'SELECT password FROM users WHERE username="{username}"'
+    query = f'SELECT password, account_type FROM users WHERE username="{username}"'
     cursor.execute(query)
 
     output = cursor.fetchone()
-    return output[0]
+    return output
 
 def add_dress(conn:mysql.connection,name,description,img_url, price, stock):
     cursor=conn.cursor()

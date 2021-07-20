@@ -49,7 +49,8 @@ def home():
             logout_link = url_for('login.logout'),
             profile_link = url_for('profile'),
             admin_link = url_for('admin.admin'),
-            is_loggedin = is_loggedin
+            is_loggedin = is_loggedin,
+            is_admin = session['user_type'] == 'admin'
         )
 
 @app.route('/profile')
@@ -62,19 +63,10 @@ def profile():
         return render_template('profile.html', user=username,
                              homepage_link=url_for('home'), 
                              admin_link = url_for('admin.admin'), 
-                             logout_link = url_for('login.logout'))
+                             logout_link = url_for('login.logout'),
+                             isadmin = session['user_type'] == 'admin')
     else:
         return redirect(url_for('login.login'))
-
-# Only admins :)
-@app.route('/dbtest')
-def dbtest():
-    conn = mysql.connection
-    
-    output = view_all_users(conn)
-
-    conn.close()
-    return str(output)
 
 if __name__ == '__main__':
    app.run(debug=True)

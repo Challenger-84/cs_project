@@ -10,7 +10,7 @@ from auth.login import login_blueprint
 from auth.signup import signup_blueprint
 from admin.admin import admin_blueprint
 
-from db_queries import view_all_users
+from db_queries import login_info_returner
 
 app = Flask(__name__)
 
@@ -39,7 +39,9 @@ app.permanent_session_lifetime = timedelta(minutes=10)
 @app.route('/')
 def home():
     if 'username' in session:
-        is_loggedin = True  
+        conn = mysql.connection
+        is_loggedin = True
+        session['user_type'] = login_info_returner(conn, session['username'])[1]
     else:
         is_loggedin = False
 

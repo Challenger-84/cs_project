@@ -45,6 +45,7 @@ def view_all_dress(conn:mysql.connection):
     output=cursor.fetchall()
     return output
 
+# Not currently in use
 def update_user_account(conn:mysql.connection, userid, username, new_account_type):
     cursor=conn.cursor()
     query=f'UPDATE users SET account_type="{new_account_type}" where userid="{userid}" and username="{username}";'

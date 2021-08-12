@@ -82,6 +82,10 @@ def deleteUser(userid):
         conn.close()
 
         return redirect(url_for('admin.viewallusers'))
+    
+    else:
+        flash('Not enough premission to access the page')
+        redirect(url_for('home'))
 
 @admin_blueprint.route('/changeuser/<userid>/<current_type>')
 def changeUser(userid, current_type):
@@ -96,5 +100,9 @@ def changeUser(userid, current_type):
             update_user_account(conn, userid, 'user')
 
         return redirect(url_for('admin.viewallusers'))
+    
+    else:
+        flash('Not enough premission to access the page')
+        redirect(url_for('home'))
 
 

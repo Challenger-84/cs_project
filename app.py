@@ -5,6 +5,8 @@ import mysql.connector
 from datetime import timedelta
 import os
 
+from db_queries import view_all_dress
+
 # Importing blueprints
 from auth.login import login_blueprint
 from auth.signup import signup_blueprint
@@ -49,6 +51,11 @@ def home():
         is_admin = False
         session['user_type'] = 'user'
 
+    mysql = app.config['mysql']
+    conn = mysql.connection
+
+    dresses = view_all_dress(conn)
+
     return render_template('index.html', 
             login_link = url_for('login.login'),
             signup_link = url_for('signup.signup'), 
@@ -56,7 +63,8 @@ def home():
             profile_link = url_for('profile'),
             admin_link = url_for('admin.admin'),
             is_loggedin = is_loggedin,
-            is_admin = is_admin
+            is_admin = is_admin,
+            dresses = dresses
         )
 
 @app.route('/profile')

@@ -61,3 +61,8 @@ ul.navbar a{
     border-radius: 10px;
     font-size: 14px;
 }
+
+.flex-container{
+    display: flex;
+    flex-direction: row;
+}

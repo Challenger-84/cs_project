@@ -3,6 +3,7 @@ dresspage_blueprint = Blueprint('dresspage', __name__, template_folder='template
 
 @dresspage_blueprint.route('/dresspage')
 def dresspage():
-    return render_template('Dresspage.html')
+    return render_template('Dresspage.html',
+                            dress_image_link= 'https://www.nike.com/in/t/sportswear-t-shirt-dw59Bv')
       
 

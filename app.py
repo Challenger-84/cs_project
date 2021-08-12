@@ -9,6 +9,7 @@ import os
 from auth.login import login_blueprint
 from auth.signup import signup_blueprint
 from admin.admin import admin_blueprint
+from Dresspage.Flaskdress import dresspage_blueprint
 
 app = Flask(__name__)
 
@@ -16,6 +17,7 @@ app = Flask(__name__)
 app.register_blueprint(login_blueprint)
 app.register_blueprint(signup_blueprint)
 app.register_blueprint(admin_blueprint)
+app.register_blueprint(dresspage_blueprint)
 
 # Setting up config var for mysql
 app.config['MYSQL_USER'] = os.getenv('MYSQL_USER')

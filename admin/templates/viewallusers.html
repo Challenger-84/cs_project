@@ -16,6 +16,10 @@
             <td> {{user[1]}}</td>
             <td> {{user[2]}}</td>
             <td> {{user[4]}}</td>
+            <td> <a href= {{delete_user_link}}/{{user[0]}}>
+                <input type="button" class="button" value="Delete User">
+                </a>
+            </td>
         </tr>
         {% endfor %}
     </table>

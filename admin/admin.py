@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, url_for, request, flash, redirect, current_app, session
-from db_queries import add_dress, view_all_dress, view_all_users
+from db_queries import add_dress, view_all_dress, view_all_users, deleteuser
 
 admin_blueprint = Blueprint('admin', __name__, template_folder='templates', static_folder='static', url_prefix='/admin')
 
@@ -67,4 +67,19 @@ def viewallusers():
                             users = users, 
                             add_dress_link = url_for('admin.addnewdress'),
                             view_dress_link = url_for('admin.viewalldress'),
-                            view_user_link= url_for('admin.viewallusers'))
+                            view_user_link= url_for('admin.viewallusers'),
+                            delete_user_link = '/admin/deleteuser')
+
+@admin_blueprint.route('/deleteuser/<userid>/')
+def deleteUser(userid):
+
+    if session['user_type'] == 'admin':
+        mysql = current_app.config['mysql']
+        conn = mysql.connection
+
+        deleteuser(conn, userid)
+        conn.close()
+
+        return redirect(url_for('admin.viewallusers'))
+
+

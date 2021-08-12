@@ -52,5 +52,11 @@ def update_user_account(conn:mysql.connection, userid, username, new_account_typ
     cursor.execute(query)
     conn.commit()
 
+def deleteuser(conn:mysql.connection, id):
+    cursor = conn.cursor()
+    query = f'DELETE FROM users WHERE userid={id}'
+    cursor.execute(query)
+    conn.commit()
+
 
     

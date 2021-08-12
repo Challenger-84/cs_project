@@ -10,8 +10,6 @@ from auth.login import login_blueprint
 from auth.signup import signup_blueprint
 from admin.admin import admin_blueprint
 
-from db_queries import login_info_returner
-
 app = Flask(__name__)
 
 # Registering the blueprinta

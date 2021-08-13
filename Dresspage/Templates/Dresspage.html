@@ -1,12 +1,9 @@
-<!DOCTYPE html>
-<html>
-<head>
-<h1>Dress page</h1>
+{% extends base.html %}
 
+{% block Title %}Dress Page- {{dress_name}}{% endblock %}
+
+{% block content %}
+<h2>{{dress_name}}</h2>
 <img src="{{dress_image_link}}" alt="Image not found">
-<p>Dress Description</p>
-
-</head>
-<body>
-</body>
-</html>
+<p>{{description}}</p>
+{% endblock %}

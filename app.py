@@ -11,7 +11,7 @@ from db_queries import view_all_dress
 from auth.login import login_blueprint
 from auth.signup import signup_blueprint
 from admin.admin import admin_blueprint
-from Dresspage.dresspage import dresspage_blueprint
+from dress_page.dresspage import dresspage_blueprint
 
 app = Flask(__name__)
 

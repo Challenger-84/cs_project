@@ -7,8 +7,10 @@ def dresspage(dressid):
     mysql = current_app.config['mysql']
     connection=mysql.connection
     dress_info=getDress(connection,dressid)
-    print(dress_info)
+    
     return render_template('Dresspage.html',
-                            dress_image_link= 'https://www.nike.com/in/t/sportswear-t-shirt-dw59Bv')
+                            dress_name=dress_info[1],
+                            description=dress_info[2],
+                            dress_image_link=dress_info[3])
       
 

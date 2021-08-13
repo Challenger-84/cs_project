@@ -59,7 +59,7 @@ def deleteuser(conn:mysql.connection, id):
 
 def getDress(conn: mysql.connection, id):
     cursor = conn.cursor()
-    query = f"SELECT * FROM dress WHERE id={id}"
+    query = f"SELECT * FROM dress WHERE dressid={id}"
     cursor.execute(query)
 
     return cursor.fetchone()

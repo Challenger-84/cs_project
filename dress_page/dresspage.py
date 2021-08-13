@@ -9,7 +9,7 @@ def dresspage(dressid):
     connection=mysql.connection
     dress_info=getDress(connection,dressid)
     
-    return render_template('Dresspage.html',
+    return render_template('dresspage.html',
                             homepage_link = url_for('home'),
                             dress_name=dress_info[1],
                             description=dress_info[2],

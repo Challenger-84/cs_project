@@ -48,18 +48,17 @@
     {% endwith %}
 </h5>
 
+<div class='flex-container'>
 {% for dress in dresses %}
-    <div class="flex-container">
-        <img src={{dress[3]}} alt = 'Image not found' height=150 width=150>
-        <div>
+    <div class="dress-container">
+        <img src={{dress[3]}} alt = 'Image not found' height=180 width=180>
+
             <a href=/dresspage/{{dress[0]}}>
                 <h4>{{dress[1]}}</h4>
             </a>
             <h4>Rs.{{dress[4]}}</h4>
-            <p>{{dress[2]}}</p>
-        </div>
     </div>
-<hr>
-{% endfor %}
 
+{% endfor %}
+</div>
 {% endblock %}

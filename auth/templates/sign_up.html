@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% block stylesheet %}
+<link rel='stylesheet' type="text/css" href="{{ url_for('static', filename='auth_pages_style.css')}}">
 <link rel='stylesheet' type="text/css" href="{{ url_for('static', filename='stlye.css')}}">
 {% endblock %}
 {% block Title %}Signup -{% endblock %}
@@ -13,15 +14,15 @@
     </li>
 {% endblock %}
 {% block content %}
-    <div>
+    <div class="inp_box">
         <h1>Signup</h1>
         
-        <form action='#' method='post'>
-            <input type="text" name="username" placeholder="Enter Username" ><br>
-            <input type="email" name="email" placeholder="Enter Email" ><br>
-            <input type="password" name="password" placeholder="Enter Password"><br>
-            <input type="password" name="confirm password" placeholder="Confirm Password"><br>
-            <h5 id=flash_msg>
+        <form class="flex-container" action='#' method='post'>
+            <input class="textbox" type="text" name="username" placeholder="Enter Username" >
+            <input class="textbox" type="email" name="email" placeholder="Enter Email" >
+            <input class="textbox" type="password" name="password" placeholder="Enter Password">
+            <input class="textbox" type="password" name="confirm password" placeholder="Confirm Password">
+            <h5 id=flash_msg></h5>
                 {% with messages = get_flashed_messages() %}
                     {% if messages %}
                         {% for message in messages %}

@@ -1,29 +1,25 @@
-/* Not in use currently */
-
-.navbar {
-    text-align: left;
+.textbox{
+    padding: 8px 16px;
+    font-size: 16px;
+    border-radius: 10px;
 }
 
-body {
-    background-color:#454341; 
-    color: white;
-    text-align: center;
-    font-family:sans-serif ;
+h1{
+    font-size: 45px;
 }
 
-h5 {
-    color: tomato;
-    font-size: 15px;
+.flex-container{
+    align-self: center;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: column !important;
+    width: 300px;
 }
 
-a:link {
-    color: lightblue;
-}
-
-a:visited{
-    color: lightblue;
-}
-
-input{
-    margin: 5px;
+.inp_box{
+    display: flex;
+    align-content: center;
+    justify-content: center ;
+    flex-direction: column;
 }

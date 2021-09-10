@@ -6,7 +6,7 @@ from werkzeug.security import check_password_hash
 from db_queries import if_user, login_info_returner
 
 
-login_blueprint = Blueprint('login', __name__, template_folder="templates", static_folder="static")
+login_blueprint = Blueprint('login', __name__, template_folder="templates", static_folder='static', static_url_path='/auth/static')
 
 @login_blueprint.route('/login', methods=['GET', 'POST'])
 def login():

@@ -1,5 +1,8 @@
+import os
+
 from flask import Blueprint, render_template, url_for, request, flash, redirect, current_app, session
 from utils.db_queries import add_dress, view_all_dress, view_all_users, deleteuser, update_user_account
+from utils.img_host import upload_file
 
 admin_blueprint = Blueprint('admin', __name__, template_folder='templates', static_folder='static', url_prefix='/admin')
 
@@ -28,10 +31,13 @@ def addnewdress():
         dress_img = request.files['img_file']
         dress_stock = request.form['stock']
 
-        conn = mysql.connection
+        # Uploading image file to dropbox
         dress_img.save(dress_img.filename)
+        stored_path = upload_file(dress_img.filename)
+        os.remove(dress_img.filename)
 
-        #add_dress(conn,dress_name,dress_description,dress_price, dress_stock)
+        conn = mysql.connection
+        add_dress(conn,dress_name,dress_description,stored_path,dress_price, dress_stock)
         conn.close()
         
         flash("Dress added to the store database.")

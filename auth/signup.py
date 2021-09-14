@@ -1,7 +1,7 @@
 from flask import Blueprint, request, current_app, url_for, render_template, session, flash, redirect
 from werkzeug.security import generate_password_hash
 
-from db_queries import add_user,if_user
+from utils.db_queries import add_user,if_user
 
 
 signup_blueprint = Blueprint('signup', __name__, template_folder='templates', static_folder='static')

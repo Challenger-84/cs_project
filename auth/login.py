@@ -3,7 +3,7 @@ from flask import Blueprint , request, session, flash, redirect, render_template
 from flask_mysql_connector import MySQL
 from werkzeug.security import check_password_hash
 
-from db_queries import if_user, login_info_returner
+from utils.db_queries import if_user, login_info_returner
 
 
 login_blueprint = Blueprint('login', __name__, template_folder="templates", static_folder='static', static_url_path='/auth/static')

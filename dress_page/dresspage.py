@@ -1,6 +1,7 @@
 from flask import Blueprint,render_template,current_app
 from flask.helpers import url_for 
-from db_queries import getDress
+from utils.db_queries import getDress
+
 dresspage_blueprint = Blueprint('dresspage', __name__, template_folder='templates', static_folder='static')
 
 @dresspage_blueprint.route('/dresspage/<dressid>')

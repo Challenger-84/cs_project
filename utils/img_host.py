@@ -1,6 +1,8 @@
+import os
 import dropbox
 
-dropbox_access_token = "upKK1SR_CWcAAAAAAAAAAT68jYjGN_cZUkqpBAN4YMug1A5e3qsMZsa8ykikE-2Y"
+print(os.environ['DROPBOX_TOKEN'])
+dropbox_access_token = os.getenv('DROPBOX_TOKEN')
 
 client = dropbox.Dropbox(dropbox_access_token)
 

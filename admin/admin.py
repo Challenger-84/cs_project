@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, url_for, request, flash, redirect, current_app, session
-from db_queries import add_dress, view_all_dress, view_all_users, deleteuser, update_user_account
+from utils.db_queries import add_dress, view_all_dress, view_all_users, deleteuser, update_user_account
 
 admin_blueprint = Blueprint('admin', __name__, template_folder='templates', static_folder='static', url_prefix='/admin')
 
@@ -25,12 +25,13 @@ def addnewdress():
         dress_name = request.form['dress_name']
         dress_description = request.form['description']
         dress_price = request.form['Price']
-        dress_imgurl = request.form['img_url']
+        dress_img = request.files['img_file']
         dress_stock = request.form['stock']
 
         conn = mysql.connection
+        dress_img.save(dress_img.filename)
 
-        add_dress(conn,dress_name,dress_description, dress_imgurl, dress_price, dress_stock)
+        #add_dress(conn,dress_name,dress_description,dress_price, dress_stock)
         conn.close()
         
         flash("Dress added to the store database.")

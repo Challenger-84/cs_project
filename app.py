@@ -5,7 +5,7 @@ import mysql.connector
 from datetime import timedelta
 import os
 
-from db_queries import view_all_dress
+from utils.db_queries import view_all_dress
 
 # Importing blueprints
 from auth.login import login_blueprint

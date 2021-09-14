@@ -6,13 +6,13 @@
 {% block navbar_buttons %}
 {% if not is_loggedin %}
     <li class=navbar-container>
-        <a href={{signup_link}}>
-            <input class="button" type="button" value="Signup">
+        <a href={{login_link}}>
+            <input class="button" type="button" value="Login">
         </a>
     </li>
     <li class=navbar-container>
-        <a href={{login_link}}>
-            <input class="button" type="button" value="Login">
+        <a href={{signup_link}}>
+            <input class="button" type="button" value="Signup">
         </a>
     </li>
 {% else %}

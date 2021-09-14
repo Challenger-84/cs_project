@@ -5,30 +5,30 @@
 
 {% block navbar_buttons %}
 {% if not is_loggedin %}
-    <li>
+    <li class=navbar-container>
         <a href={{signup_link}}>
             <input class="button" type="button" value="Signup">
         </a>
     </li>
-    <li>
+    <li class=navbar-container>
         <a href={{login_link}}>
             <input class="button" type="button" value="Login">
         </a>
     </li>
 {% else %}
-    <li>
+    <li class=navbar-container>
         <a href={{profile_link}}>
             <input class="button" type="button" value="Profile">
         </a>
     </li>
     {% if is_admin %}
-    <li>
+    <li class=navbar-container>
         <a href={{admin_link}}>
             <input class="button" type="button" value="Admin Page">
         </a>
     </li>
     {% endif %}
-    <li>
+    <li class=navbar-container>
         <a href={{logout_link}}>
             <input class="button" type="button" value="Logout">
         </a>

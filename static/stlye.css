@@ -45,9 +45,16 @@ input{
     padding: 0px;
     overflow: hidden;
 }
-ul.navbar > li {
+.searchbox-container{
+    float: left ;
+}
+.navbar-container{
+    float: right;
+}
+.logo-container{
     float: left;
 }
+
 ul.navbar a{
     display: block;
     color: black;
@@ -56,6 +63,7 @@ ul.navbar a{
     text-decoration: none;
 }
 #searchbox{
+    width: 400px;
     padding: 5px 16px;
     margin-top: 20px;
     border-radius: 10px;
@@ -65,7 +73,6 @@ ul.navbar a{
 .flex-container{
     display: flex;
     flex-direction: row;
-
 }
 
 .dress-container{
@@ -81,4 +88,15 @@ ul.navbar a{
     border-width: 5px;
     border-radius: 1px;
     border-color: white;
+}
+
+.dress-container > a{
+    text-decoration: none;
+    margin-bottom: -20px;
+    margin-top: -10px;
+}
+
+.dress-container > h4{
+    margin-top: 10px;
+    margin-bottom: 0px;
 }

@@ -5,13 +5,13 @@
 
 {% block navbar_buttons %}
     {% if isadmin %}
-    <li>
+    <li class=navbar-container>
         <a href={{admin_link}}>
             <input class="button" type="button" value="Admin Page">
         </a>
     </li>
     {% endif %}
-    <li>
+    <li class=navbar-container>
         <a href={{logout_link}}>
             <input class="button" type="button" value="Logout">
         </a>

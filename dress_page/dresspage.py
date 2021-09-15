@@ -15,7 +15,7 @@ def dresspage(dressid):
     img_path = get_file(img_path)
     
     return render_template('dresspage.html',
-                            homepage_link = url_for('home'),
+                            homepage_link = url_for('root'),
                             dress_name=dress_info[1],
                             description=dress_info[2],
                             dress_image_link=url_for('.static', filename=img_path))

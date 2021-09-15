@@ -54,7 +54,6 @@ def viewalldress():
     mysql = current_app.config['mysql']
     conn = mysql.connection
     dresses = view_all_dress(conn)
-    print(dresses)
     conn.close
     return render_template('viewalldress.html', 
                             dresses = dresses,
@@ -90,7 +89,7 @@ def deleteUser(userid):
     
     else:
         flash('Not enough premission to access the page')
-        redirect(url_for('home'))
+        redirect(url_for('root'))
 
 @admin_blueprint.route('/changeuser/<userid>/<current_type>')
 def changeUser(userid, current_type):
@@ -108,6 +107,6 @@ def changeUser(userid, current_type):
     
     else:
         flash('Not enough premission to access the page')
-        redirect(url_for('home'))
+        redirect(url_for('root'))
 
 

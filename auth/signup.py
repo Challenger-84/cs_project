@@ -59,6 +59,6 @@ def signup():
     else:
         # If the request method is GET (ie The user opened the webpage)
         return render_template('sign_up.html', 
-                homepage_link = url_for('home'),
+                homepage_link = url_for('root'),
                 login_link = url_for('login.login')
             )

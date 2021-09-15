@@ -1,11 +1,11 @@
-from flask import Flask,render_template, url_for, redirect, session
+from flask import Flask,render_template, url_for, redirect, session, request
 from flask_mysql_connector import MySQL
 import mysql.connector
 
 from datetime import timedelta
 import os
 
-from utils.db_queries import view_all_dress
+from utils.db_queries import view_all_dress, searchDress
 from utils.img_host import get_file
 
 # Importing blueprints
@@ -37,9 +37,14 @@ app.secret_key = os.getenv('SECRET_KEY')
 # Setting how long a permanent session lasts
 app.permanent_session_lifetime = timedelta(minutes=10)
 
-# HomePage
 @app.route('/')
-def home():
+def root():
+    return redirect(url_for('home' , searchterm='#!#!23L#'))
+
+# HomePage
+@app.route('/<searchterm>')
+def home(searchterm):
+
     if 'username' in session:
         is_loggedin = True
     else:
@@ -54,7 +59,15 @@ def home():
     mysql = app.config['mysql']
     conn = mysql.connection
 
-    dresses = view_all_dress(conn)
+    print(searchterm)
+    if searchterm != '#!#!23L#':
+        # Getting result from DB
+        mysql = app.config['mysql']
+        conn = mysql.connection
+        dresses = searchDress(conn, searchterm)
+    else:
+        dresses = view_all_dress(conn)
+    
     new_dresses = []
 
     for dress in dresses:
@@ -94,6 +107,18 @@ def profile():
                              isadmin = is_admin)
     else:
         return redirect(url_for('login.login'))
+
+@app.route('/searchresult/', methods=['GET', 'POST'])
+def search():
+    """ The page which the user will be redirected to when searching"""
+
+    if request.method == 'POST':
+        search_term = request.form['Search']
+        print(search_term)
+        return redirect(url_for('home', searchterm=search_term))
+    
+    else:
+        return redirect(url_for('home', searchterm='#!#!23L#'))
 
 if __name__ == '__main__':
    app.run(debug=True)

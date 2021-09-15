@@ -63,3 +63,10 @@ def getDress(conn: mysql.connection, id):
     cursor.execute(query)
 
     return cursor.fetchone()
+
+def searchDress(conn: mysql.connection, search_term):
+    cursor = conn.cursor()
+    query = f"SELECT * FROM dress WHERE name LIKE '%{search_term}%'"
+    cursor.execute(query)
+
+    return cursor.fetchall()

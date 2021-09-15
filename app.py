@@ -101,7 +101,7 @@ def profile():
             is_admin = False
 
         return render_template('profile.html', user=username,
-                             homepage_link=url_for('home'), 
+                             homepage_link=url_for('root'), 
                              admin_link = url_for('admin.admin'), 
                              logout_link = url_for('login.logout'),
                              isadmin = is_admin)

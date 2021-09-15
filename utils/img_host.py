@@ -1,4 +1,6 @@
 import os
+from pathlib import Path
+
 import dropbox
 
 def upload_file(file):
@@ -13,9 +15,10 @@ def get_file(path):
     dropbox_access_token = os.getenv('DROPBOX_TOKEN')
     client = dropbox.Dropbox(dropbox_access_token)
 
-    with open('static/cache/' + path, "wb") as f:
-        metadata, result = client.files_download(path='/'+ path)
-        f.write(result.content)
+    if not Path('static/cache/' + path).is_file():
+        with open('static/cache/' + path, "wb") as f:
+            metadata, result = client.files_download(path='/'+ path)
+            f.write(result.content)
     
     return 'cache/' + path
 

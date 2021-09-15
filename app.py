@@ -6,6 +6,7 @@ from datetime import timedelta
 import os
 
 from utils.db_queries import view_all_dress
+from utils.img_host import get_file
 
 # Importing blueprints
 from auth.login import login_blueprint
@@ -54,6 +55,13 @@ def home():
     conn = mysql.connection
 
     dresses = view_all_dress(conn)
+    new_dresses = []
+
+    for dress in dresses:
+        dress = list(dress)
+        dress[3] = get_file(dress[3])
+        dress[3] = url_for('.static', filename=dress[3])
+        new_dresses.append(dress)
 
     return render_template('index.html', 
             login_link = url_for('login.login'),
@@ -63,7 +71,7 @@ def home():
             admin_link = url_for('admin.admin'),
             is_loggedin = is_loggedin,
             is_admin = is_admin,
-            dresses = dresses
+            dresses = new_dresses
         )
 
 @app.route('/profile')

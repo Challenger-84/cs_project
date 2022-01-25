@@ -17,6 +17,11 @@
     </li>
 {% else %}
     <li class=navbar-container>
+        <a href={{cartpage_link}}>
+            <img style="margin-top:2px" src="{{url_for('static', filename='images/cart_image.png')}}" alt="Cart Page" height=35>
+        </a>
+    </li>
+    <li class=navbar-container>
         <a href={{profile_link}}>
             <input class="button" type="button" value="Profile">
         </a>

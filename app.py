@@ -82,6 +82,7 @@ def home(searchterm):
             logout_link = url_for('login.logout'),
             profile_link = url_for('profile'),
             admin_link = url_for('admin.admin'),
+            cartpage_link = '',
             is_loggedin = is_loggedin,
             is_admin = is_admin,
             dresses = new_dresses

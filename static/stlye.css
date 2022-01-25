@@ -107,23 +107,3 @@ ul.navbar a{
     flex-direction: column;
     margin-left: 20px;
 }
-
-.TextBox{
-    align-self: left;
-    font-size: 15px;
-
-    border-radius: 5px;
-    width: 300px;
-    height: 5px;
-    padding: 10px;
-}
-
-.DescBox{
-    align-self: left;
-    font-size: 15px;
-
-    border-radius: 5px;
-    width: 300px;
-    height: 75px;
-    padding: 10px;
-}

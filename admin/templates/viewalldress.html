@@ -11,6 +11,7 @@
             <!--<th>Image Url</th>-->
             <th>Price</th>
             <th>Stock</th>
+            <th>Delete Dress</th>
         </tr>
         {% for dress in dresses %}
         <tr>
@@ -20,6 +21,10 @@
             <!--<td> {{dress[3]}}</td>-->
             <td> {{dress[4]}}</td>
             <td> {{dress[5]}}</td>
+            <td>
+                <a href="/admin/deleteDress/{{dress[0]}}"></a>
+                <input type="button" value='Delete Dress'>
+            </td>
         </tr>
         {% endfor %}
     </table>

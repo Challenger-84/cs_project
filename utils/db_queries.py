@@ -62,8 +62,9 @@ def searchDress(conn: mysql.connection, search_term):
     return cursor.fetchall()
 
 def add_dress(conn:mysql.connection,name,description,img_url, price, stock):
-    cursor=conn.cursor()
-    query=f'INSERT INTO dress(name,description,img_url,price,stock)VALUES("{name}","{description}","{img_url}","{price}","{stock}")'
+    cursor = conn.cursor()
+    query = f'INSERT INTO dress(name,description,img_url,price,stock)VALUES("{name}","{description}","{img_url}","{price}","{stock}")'
+    
     cursor.execute(query)
     conn.commit()
 
@@ -77,6 +78,6 @@ def view_all_dress(conn:mysql.connection):
 def del_dress(conn:mysql.connection, id):
     cursor = conn.cursor()
     query = f'DELETE FROM DRESS WHERE dressid={id}'
-    
+
     cursor.execute(query)
     conn.commit()

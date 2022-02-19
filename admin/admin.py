@@ -73,8 +73,7 @@ def viewallusers():
                             users = users, 
                             add_dress_link = url_for('admin.addnewdress'),
                             view_dress_link = url_for('admin.viewalldress'),
-                            view_user_link= url_for('admin.viewallusers'), 
-                            delete_dress_link = url_for('admin.deleteDress'))
+                            view_user_link= url_for('admin.viewallusers'))
 
 @admin_blueprint.route('/deleteuser/<userid>/')
 def deleteUser(userid):

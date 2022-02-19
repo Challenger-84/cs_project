@@ -1,4 +1,4 @@
-from flask import Blueprint,render_template,current_app, url_for
+from flask import Blueprint, render_template, current_app, url_for
 
 from utils.db_queries import getDress
 from utils.img_host import get_file

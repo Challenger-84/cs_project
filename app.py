@@ -1,3 +1,4 @@
+""" Imports """
 from flask import Flask,render_template, url_for, redirect, session, request
 from flask_mysql_connector import MySQL
 import mysql.connector
@@ -13,6 +14,7 @@ from auth.login import login_blueprint
 from auth.signup import signup_blueprint
 from admin.admin import admin_blueprint
 from dress_page.dresspage import dresspage_blueprint
+""" Imports Done """
 
 app = Flask(__name__)
 
@@ -31,7 +33,6 @@ mysql = MySQL(app)
 
 app.config['mysql'] = mysql
 
-# seckret key dont leak :)
 app.secret_key = os.getenv('SECRET_KEY')
 
 # Setting how long a permanent session lasts
@@ -44,7 +45,7 @@ def root():
 # HomePage
 @app.route('/<searchterm>')
 def home(searchterm):
-
+    # Checking user type
     if 'username' in session:
         is_loggedin = True
     else:
@@ -59,7 +60,6 @@ def home(searchterm):
     mysql = app.config['mysql']
     conn = mysql.connection
 
-    print(searchterm)
     if searchterm != '#!#!23L#':
         # Getting result from DB
         mysql = app.config['mysql']
@@ -70,6 +70,7 @@ def home(searchterm):
     
     new_dresses = []
 
+    # Displaying dresses in main page
     for dress in dresses:
         dress = list(dress)
         dress[3] = get_file(dress[3])

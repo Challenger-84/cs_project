@@ -8,7 +8,7 @@ cartpage_blueprint = Blueprint(
 @cartpage_blueprint.route("/cartpage")
 def cartpage():
     # mysql connection
-    mysql = current_app.config["mysql"]
-    connection = mysql.connection
+    mysql = current_app.config['mysql']
+    connection=mysql.connection
 
-    render_template("cartpage.html")
+    return render_template('cartpage.html')

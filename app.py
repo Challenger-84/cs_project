@@ -14,7 +14,7 @@ from auth.login import login_blueprint
 from auth.signup import signup_blueprint
 from admin.admin import admin_blueprint
 from dress_page.dresspage import dresspage_blueprint
-
+from checkout.cartpage import cartpage_blueprint
 """ Imports Done """
 
 app = Flask(__name__)
@@ -24,6 +24,7 @@ app.register_blueprint(login_blueprint)
 app.register_blueprint(signup_blueprint)
 app.register_blueprint(admin_blueprint)
 app.register_blueprint(dresspage_blueprint)
+app.register_blueprint(cartpage_blueprint)
 
 # Setting up config var for mysql
 app.config["MYSQL_USER"] = os.getenv("MYSQL_USER")
@@ -75,21 +76,19 @@ def home():
         dress[3] = url_for(".static", filename=dress[3])
         new_dresses.append(dress)
 
-    return render_template(
-        "index.html",
-        login_link=url_for("login.login"),
-        signup_link=url_for("signup.signup"),
-        logout_link=url_for("login.logout"),
-        profile_link=url_for("profile"),
-        admin_link=url_for("admin.admin"),
-        cartpage_link="",
-        is_loggedin=is_loggedin,
-        is_admin=is_admin,
-        dresses=new_dresses,
-    )
+    return render_template('index.html', 
+            login_link = url_for('login.login'),
+            signup_link = url_for('signup.signup'), 
+            logout_link = url_for('login.logout'),
+            profile_link = url_for('profile'),
+            admin_link = url_for('admin.admin'),
+            cartpage_link = url_for('cartpage.cartpage'),
+            is_loggedin = is_loggedin,
+            is_admin = is_admin,
+            dresses = new_dresses
+        )
 
-
-@app.route("/profile")
+@app.route('/profile')
 def profile():
     """User's Profile page"""
 

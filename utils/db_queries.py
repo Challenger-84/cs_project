@@ -70,9 +70,9 @@ def searchDress(conn: mysql.connection, search_term):
     return cursor.fetchall()
 
 
-def add_dress(conn: mysql.connection, name, description, img_url, price, stock):
+def add_dress(conn: mysql.connection, name, description, img_url, price, stock, metadata):
     cursor = conn.cursor()
-    query = f'INSERT INTO dress(name,description,img_url,price,stock)VALUES("{name}","{description}","{img_url}","{price}","{stock}")'
+    query = f'INSERT INTO dress (name,description,img_url,price,stock, metadata) VALUES("{name}","{description}","{img_url}","{price}","{stock}", "{metadata})'
 
     cursor.execute(query)
     conn.commit()

@@ -31,7 +31,7 @@ admin_blueprint = Blueprint(
 
 @admin_blueprint.route("/")
 def admin():
-    if session["user_type"] == "admin":
+    if "user_type" in session.keys() and session["user_type"] == "admin":
         return render_template(
             "admin.html",
             homepage_link=url_for("home"),
@@ -50,11 +50,16 @@ def addnewdress():
 
     if request.method == "POST":
 
-        dress_name = request.form["dress_name"]
+        dress_name = request.form["name"]
         dress_description = request.form["description"]
-        dress_price = request.form["Price"]
+        dress_price = request.form["price"]
         dress_img = request.files["img_file"]
         dress_stock = request.form["stock"]
+        metadata = request.form["metadata"]
+        print(request.form.keys())
+        if dress_img.filename == "":
+            flash("Please select an image")
+            return redirect(url_for("admin.addnewdress"))
 
         # Uploading image file to dropbox
         dress_img.save(dress_img.filename)
@@ -63,7 +68,7 @@ def addnewdress():
 
         conn = mysql.connection
         add_dress(
-            conn, dress_name, dress_description, stored_path, dress_price, dress_stock
+            conn, dress_name, dress_description, stored_path, dress_price, dress_stock, metadata
         )
         conn.close()
 

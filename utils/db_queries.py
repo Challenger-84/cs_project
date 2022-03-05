@@ -1,10 +1,9 @@
 import mysql.connector as mysql
 
 # User related DB functions
-def add_user(conn: mysql.connection, username, 
-                email, password, account_tpye):
+def add_user(conn: mysql.connection, username, email, password, account_tpye):
     """Adds a new user to the table 'users'"""
-    cursor = conn.cursor() 
+    cursor = conn.cursor()
     query = f'INSERT INTO users (username, email, password, account_type) VALUES ("{username}", "{email}", "{password}", "{account_tpye}")'
     cursor.execute(query)
     conn.commit()
@@ -12,18 +11,20 @@ def add_user(conn: mysql.connection, username,
 
 def view_all_users(conn: mysql.connection):
     cursor = conn.cursor()
-    cursor.execute('SELECT * FROM users;')
-    
+    cursor.execute("SELECT * FROM users;")
+
     output = cursor.fetchall()
     return output
 
+
 def if_user(conn: mysql.connection, username):
     cursor = conn.cursor()
-    query= f'SELECT * FROM users WHERE username="{username}"'
+    query = f'SELECT * FROM users WHERE username="{username}"'
     cursor.execute(query)
-    
+
     output = cursor.fetchone()
     return output
+
 
 def login_info_returner(conn: mysql.connection, username):
     cursor = conn.cursor(buffered=True)
@@ -33,19 +34,25 @@ def login_info_returner(conn: mysql.connection, username):
     output = cursor.fetchone()
     return output
 
-def update_user_account(conn:mysql.connection, userid, new_account_type):
-    cursor=conn.cursor()
-    query= f'UPDATE users SET account_type="{new_account_type}" where userid="{userid}";'
+
+def update_user_account(conn: mysql.connection, userid, new_account_type):
+    cursor = conn.cursor()
+    query = (
+        f'UPDATE users SET account_type="{new_account_type}" where userid="{userid}";'
+    )
     cursor.execute(query)
     conn.commit()
 
-def deleteuser(conn:mysql.connection, id):
+
+def deleteuser(conn: mysql.connection, id):
     cursor = conn.cursor()
-    query = f'DELETE FROM users WHERE userid={id}'
+    query = f"DELETE FROM users WHERE userid={id}"
     cursor.execute(query)
     conn.commit()
+
 
 # Dress related DB functions
+
 
 def getDress(conn: mysql.connection, id):
     cursor = conn.cursor()
@@ -54,6 +61,7 @@ def getDress(conn: mysql.connection, id):
 
     return cursor.fetchone()
 
+
 def searchDress(conn: mysql.connection, search_term):
     cursor = conn.cursor()
     query = f"SELECT * FROM dress WHERE name LIKE '%{search_term}%'"
@@ -61,23 +69,26 @@ def searchDress(conn: mysql.connection, search_term):
 
     return cursor.fetchall()
 
-def add_dress(conn:mysql.connection,name,description,img_url, price, stock):
+
+def add_dress(conn: mysql.connection, name, description, img_url, price, stock):
     cursor = conn.cursor()
     query = f'INSERT INTO dress(name,description,img_url,price,stock)VALUES("{name}","{description}","{img_url}","{price}","{stock}")'
-    
+
     cursor.execute(query)
     conn.commit()
 
-def view_all_dress(conn:mysql.connection):
-    cursor=conn.cursor()
+
+def view_all_dress(conn: mysql.connection):
+    cursor = conn.cursor()
     cursor.execute("SELECT * from dress;")
 
-    output=cursor.fetchall()
+    output = cursor.fetchall()
     return output
 
-def del_dress(conn:mysql.connection, id):
+
+def del_dress(conn: mysql.connection, id):
     cursor = conn.cursor()
-    query = f'DELETE FROM DRESS WHERE dressid={id}'
+    query = f"DELETE FROM DRESS WHERE dressid={id}"
 
     cursor.execute(query)
     conn.commit()

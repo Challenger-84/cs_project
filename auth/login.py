@@ -76,7 +76,7 @@ def login():
             # If not we show the login page
             return render_template(
                 "login.html",
-                homepage_link=url_for("root"),
+                homepage_link=url_for("home"),
                 signup_link=url_for("signup.signup"),
             )
 
@@ -89,8 +89,8 @@ def logout():
         # Deleting the session data
         session.pop("username", None)
         flash("Logged out.")
-        return redirect(url_for("root"))
+        return redirect(url_for("home"))
     else:
         # If the user tries to logout without being logged in we flash a message
         flash("Not logged in.")
-        return redirect(url_for("root"))
+        return redirect(url_for("home"))

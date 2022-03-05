@@ -34,7 +34,7 @@ def admin():
     if session["user_type"] == "admin":
         return render_template(
             "admin.html",
-            homepage_link=url_for("root"),
+            homepage_link=url_for("home"),
             profile_link=url_for("profile"),
             addnewdress_link=url_for("admin.addnewdress"),
         )
@@ -125,7 +125,7 @@ def deleteUser(userid):
 
     else:
         flash("Not enough premission to access the page")
-        redirect(url_for("root"))
+        redirect(url_for("home"))
 
 
 @admin_blueprint.route("/changeuser/<userid>/<current_type>")
@@ -144,7 +144,7 @@ def changeUser(userid, current_type):
 
     else:
         flash("Not enough premission to access the page")
-        redirect(url_for("root"))
+        redirect(url_for("home"))
 
 
 @admin_blueprint.route("/deletedress/<dressID>")
@@ -160,4 +160,4 @@ def deleteDress(dressID):
 
     else:
         flash("Not enough premission to do that action")
-        redirect(url_for("root"))
+        redirect(url_for("home"))

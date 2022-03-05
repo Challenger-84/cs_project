@@ -1,10 +1,44 @@
 {% extends "base.html" %}
 
-{% block stylesheet %}<link rel='stylesheet' type="text/css" href="{{ url_for('static', filename='stlye.css')}}">{% endblock %}
+{% block stylesheet %}
+<link rel='stylesheet' type="text/css" href="{{ url_for('static', filename='stlye.css')}}">
+<link rel="stylesheet" href="{{ url_for('dresspage.static', filename='dress.css')}}">
+{% endblock %}
 {% block Title %}Dress Page- {{dress_name}}{% endblock %}
 
 {% block content %}
+<div id='flash_msg'>
+	{% with messages = get_flashed_messages() %}
+	{% if messages %}
+	{% for message in messages %}
+	{{ message }}
+	{% endfor %}
+	{% endif %}
+	{% endwith %}
+</div>
 <h2>{{dress_name}}</h2>
 <img src="{{dress_image_link}}" alt="Image not found">
 <p>{{description}}</p>
+<p>₹ {{price}}</p>
+
+<form action="#" method="POST" id="form">
+	<div class="metaDataContainer">
+		{% for key, value in metadata.items() %}
+		<div class="metaDataEl">
+			<label for="{{ key }}"> {{ key }}</label>
+			{% if value is string %} <select>
+				<option> {{ value }} </option>
+			</select>
+			{% else %}
+			<select name="{{ key }}" form="form">
+				{% for option in value %}
+				<option>{{option}}</option>
+				{% endfor %}
+			</select>
+			{% endif %}
+		</div>
+		{% endfor %}
+	</div>
+	<input type="submit" type="button" class="button" value="Add to Cart">
+</form>
 {% endblock %}

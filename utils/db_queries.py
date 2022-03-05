@@ -53,13 +53,12 @@ def deleteuser(conn: mysql.connection, id):
 
 # Dress related DB functions
 
-
+dress_keys = ['id', 'name', 'description', 'img_url', 'price', 'stock', 'metadata']
 def getDress(conn: mysql.connection, id):
     cursor = conn.cursor()
     query = f"SELECT * FROM dress WHERE dressid={id}"
     cursor.execute(query)
-
-    return cursor.fetchone()
+    return dict(zip(dress_keys, cursor.fetchone()))
 
 
 def searchDress(conn: mysql.connection, search_term):
@@ -92,3 +91,11 @@ def del_dress(conn: mysql.connection, id):
 
     cursor.execute(query)
     conn.commit()
+
+def add_to_cart(conn: mysql.connection, userid, dressid, metadata):
+    cursor = conn.cursor()
+    query = f'INSERT INTO cart (customer_id, dressid, metadata) VALUES("{userid}","{dressid}","{metadata}")'
+
+    cursor.execute(query)
+    conn.commit()
+    

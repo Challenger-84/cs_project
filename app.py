@@ -107,6 +107,7 @@ def profile():
             homepage_link=url_for("home"),
             admin_link=url_for("admin.admin"),
             logout_link=url_for("login.logout"),
+            cartpage_link = url_for("cartpage.cartpage"),
             isadmin=is_admin,
         )
     else:

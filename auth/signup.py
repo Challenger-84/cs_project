@@ -8,9 +8,12 @@ from flask import (
     flash,
     redirect,
 )
+from numpy import sign
 from werkzeug.security import generate_password_hash
 
 from utils.db_queries import add_user, if_user
+from utils.otp_gen import generate_otp
+import utils.mailer as mailer
 
 
 signup_blueprint = Blueprint(
@@ -45,7 +48,6 @@ def signup():
         elif password != confirm_pass:
             flash_message = "Passwords do not match"
         else:
-            # Creating the account is everything is proper
 
             # Hashing the password before storing it in out database
             password_hash = generate_password_hash(password)
@@ -57,10 +59,17 @@ def signup():
             session.permanent = True
             session["username"] = username
             session["user_type"] = "user"
+            
+             # Sending OTP if everything is proper
+            OTP = generate_otp()
+            session['OTP'] = OTP
+            # Sending the OTP 
+            subject = 'OTP for signing up'
+            body = f'Your OTP for signing up for SSE boutique store is:\n{OTP}'
+            mailer.send_mail(email, subject, body) 
 
-            flash("Successfully created the account", "info")
             conn.close()
-            return redirect(url_for("profile"))
+            return redirect(url_for("signup.enterOtp"))
 
         if flash_message:
             # If any error in the input we flash a message
@@ -74,4 +83,23 @@ def signup():
             "sign_up.html",
             homepage_link=url_for("home"),
             login_link=url_for("login.login"),
+        )
+
+@signup_blueprint.route("/enterOTP", methods=['GET', 'POST'])
+def enterOtp():
+    if request.method == 'POST':
+        entered_otp = request.form['OTP']
+        if entered_otp == session['OTP']:
+            flash = 'Successfully Logged In'
+            return redirect(url_for('profile'))
+        else:
+            flash_message = 'Incorrect OTP'
+        
+        flash(flash_message, "info")
+
+    else:
+        return render_template(
+            "enterOtp.html",
+            homepage_link=url_for("home"),
+            login_link=url_for("login.login")
         )

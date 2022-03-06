@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block stylesheet %}
+<link rel='stylesheet' type="text/css" href="{{ url_for('static', filename='auth_pages_style.css')}}">
+<link rel='stylesheet' type="text/css" href="{{ url_for('static', filename='stlye.css')}}">
+{% endblock %}
+
+{% block Title %}Signup -{% endblock %}
+
+{% block navbar_buttons %}
+<li class=navbar-container>
+    <a href={{login_link}}>
+        <input class="button" type="button" value="Login">
+    </a>
+</li>
+{% endblock %}
+
+{% block content %}
+<div class="inp_box">
+    <h1>ENTER OTP</h1>
+
+    <form class="flex-container" action='#' method='post'>
+        <input class="textbox" type="text" name="OTP" placeholder="Enter OTP">
+        
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        {% for message in messages %}
+        
+        <div id=flash_msg>
+            {{ message }}
+        </div>
+
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+        
+        <input type="submit" class="button">
+    </form>
+</div>
+{% endblock %}

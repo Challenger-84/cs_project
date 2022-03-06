@@ -56,7 +56,6 @@ def addnewdress():
         dress_img = request.files["img_file"]
         dress_stock = request.form["stock"]
         metadata = request.form["metadata"]
-        print(request.form.keys())
         if dress_img.filename == "":
             flash("Please select an image")
             return redirect(url_for("admin.addnewdress"))

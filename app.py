@@ -120,7 +120,6 @@ def search():
 
     if request.method == "POST":
         search_term = request.form["Search"]
-        print(search_term)
         return redirect(url_for("home", search=search_term))
 
     else:

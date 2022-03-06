@@ -36,7 +36,7 @@
         </div>
         <div class="counter"> {{ cart | length }} Items </div>
         <div class="prices"> Rs.{{ cart | sum(attribute="price")}}</div>
-        <div class="buy"> <input class='button' type='submit'></div>
+        <div class="buy"> <input class='button' type='submit'> </div>
     </div>
 </div>
 {% endblock %}

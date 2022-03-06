@@ -103,7 +103,6 @@ def del_dress(conn: mysql.connection, id):
 
 def add_to_cart(conn: mysql.connection, userid, dressid, metadata):
     cursor = conn.cursor()
-    print("metadata", metadata, json.dumps(metadata))
     query = f'INSERT INTO cart (customer_id, dressid, metadata) VALUES("{userid}","{dressid}",\'{json.dumps(metadata)}\')'
 
     cursor.execute(query)

@@ -50,7 +50,6 @@ def login():
                 session.permanent = True
                 session["username"] = username
                 session["user_type"] = login_info[1]  # account type
-                print(session["user_type"])
                 flash("Successfully logged in!", "info")
                 conn.close()
                 return redirect(url_for("profile"))
@@ -72,7 +71,6 @@ def login():
             flash("Already logged in.", "info")
             return redirect(url_for("profile"))
         else:
-            print(url_for("signup.signup"))
             # If not we show the login page
             return render_template(
                 "login.html",

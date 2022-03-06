@@ -114,12 +114,11 @@ def profile():
 
 @app.route('/searchresult/', methods=['GET', 'POST'])
 def search():
-    """ The page which the user will be redirected to when searching"""
+    """ The page which the user will be redirected to when searching """
 
     if request.method == 'POST':
         search_term = request.form['Search']
-        print(search_term)
-        return redirect(url_for('home', searchterm=search_term))
+        return redirect(url_for('home', searchterm=search_term))    
     
     else:
         return redirect(url_for('home', searchterm='#!#!23L#'))

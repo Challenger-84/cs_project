@@ -1,69 +1,72 @@
 {% extends "base.html" %}
 
-{% block stylesheet %}<link rel='stylesheet' type="text/css" href="{{ url_for('static', filename='stlye.css')}}">{% endblock %}
+{% block stylesheet %}
+<link rel='stylesheet' type="text/css" href="{{ url_for('static', filename='stlye.css')}}">{% endblock %}
 {% block Title %}Homepage -{% endblock %}
 
 {% block navbar_buttons %}
 {% if not is_loggedin %}
-    <li class=navbar-container>
-        <a href={{login_link}}>
-            <input class="button" type="button" value="Login">
-        </a>
-    </li>
-    <li class=navbar-container>
-        <a href={{signup_link}}>
-            <input class="button" type="button" value="Signup">
-        </a>
-    </li>
+<li class=navbar-container>
+    <a href={{login_link}}>
+        <input class="button" type="button" value="Login">
+    </a>
+</li>
+<li class=navbar-container>
+    <a href={{signup_link}}>
+        <input class="button" type="button" value="Signup">
+    </a>
+</li>
 {% else %}
-    <li class=navbar-container>
-        <a href={{cartpage_link}}>
-            <img style="margin-top:2px" src="{{url_for('static', filename='images/cart_image.png')}}" alt="Cart Page" height=35>
-        </a>
-    </li>
-    <li class=navbar-container>
-        <a href={{profile_link}}>
-            <input class="button" type="button" value="Profile">
-        </a>
-    </li>
-    {% if is_admin %}
-    <li class=navbar-container>
-        <a href={{admin_link}}>
-            <input class="button" type="button" value="Admin Page">
-        </a>
-    </li>
-    {% endif %}
-    <li class=navbar-container>
-        <a href={{logout_link}}>
-            <input class="button" type="button" value="Logout">
-        </a>
-    </li>
+<li class=navbar-container>
+    <a href={{cartpage_link}}>
+        <img style="margin-top:2px" src="{{url_for('static', filename='images/cart_image.png')}}" alt="Cart Page"
+            height=35>
+    </a>
+</li>
+<li class=navbar-container>
+    <a href={{profile_link}}>
+        <input class="button" type="button" value="Profile">
+    </a>
+</li>
+{% if is_admin %}
+<li class=navbar-container>
+    <a href={{admin_link}}>
+        <input class="button" type="button" value="Admin Page">
+    </a>
+</li>
+{% endif %}
+<li class=navbar-container>
+    <a href={{logout_link}}>
+        <input class="button" type="button" value="Logout">
+    </a>
+</li>
 {% endif %}
 {% endblock %}
 
 {% block content %}
 
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for message in messages %}
 <div id=flash_msg>
-    {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            {% for message in messages %}
-                {{ message }}
-            {% endfor %}
-        {% endif %}
-    {% endwith %}
+
+    {{ message }}
 </div>
+{% endfor %}
+{% endif %}
+{% endwith %}
 
 <div class='flex-container'>
-{% for dress in dresses %}
+    {% for dress in dresses %}
     <div class="dress-container">
-        <img src={{dress[3]}} alt = 'Image not found' height=180 width=180>
+        <img src={{dress[3]}} alt='Image not found' height=180 width=180>
 
-            <a href=/dresspage/{{dress[0]}}>
-                <h4>{{dress[1]}}</h4>
-            </a>
-            <h4>Rs.{{dress[4]}}</h4>
+        <a href=/dresspage/{{dress[0]}}>
+            <h4>{{dress[1]}}</h4>
+        </a>
+        <h4>Rs.{{dress[4]}}</h4>
     </div>
 
-{% endfor %}
+    {% endfor %}
 </div>
 {% endblock %}

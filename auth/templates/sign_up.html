@@ -7,31 +7,32 @@
 {% block Title %}Signup -{% endblock %}
 
 {% block navbar_buttons %}
-    <li class=navbar-container>
-        <a href={{login_link}}>
-            <input class="button" type="button" value="Login">
-        </a>
-    </li>
+<li class=navbar-container>
+    <a href={{login_link}}>
+        <input class="button" type="button" value="Login">
+    </a>
+</li>
 {% endblock %}
 {% block content %}
-    <div class="inp_box">
-        <h1>Signup</h1>
-        
-        <form class="flex-container" action='#' method='post'>
-            <input class="textbox" type="text" name="username" placeholder="Enter Username" >
-            <input class="textbox" type="email" name="email" placeholder="Enter Email" >
-            <input class="textbox" type="password" name="password" placeholder="Enter Password">
-            <input class="textbox" type="password" name="confirm password" placeholder="Confirm Password">
-            <div id=flash_msg></h5>
-                {% with messages = get_flashed_messages() %}
-                    {% if messages %}
-                        {% for message in messages %}
-                            {{ message }}
-                        {% endfor %}
-                    {% endif %}
-                {% endwith %}
-            </div>
-            <input type="submit" class="button">
-        </form>
-    </div>
+<div class="inp_box">
+    <h1>Signup</h1>
+
+    <form class="flex-container" action='#' method='post'>
+        <input class="textbox" type="text" name="username" placeholder="Enter Username">
+        <input class="textbox" type="email" name="email" placeholder="Enter Email">
+        <input class="textbox" type="password" name="password" placeholder="Enter Password">
+        <input class="textbox" type="password" name="confirm password" placeholder="Confirm Password">
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        {% for message in messages %}
+        <div id=flash_msg>
+            {{ message }}
+        </div>
+
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+        <input type="submit" class="button">
+    </form>
+</div>
 {% endblock %}

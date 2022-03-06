@@ -19,6 +19,7 @@ def dresspage(dressid):
         else:
             metadata = request.form
             add_to_cart(connection, session["username"], dressid, metadata)
+            flash("Added to cart")
     dress_info = getDress(connection, dressid)
 
     img_path = dress_info["img_url"]

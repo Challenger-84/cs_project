@@ -38,7 +38,7 @@ app.config["mysql"] = mysql
 app.secret_key = os.getenv("SECRET_KEY")
 
 # Setting how long a permanent session lasts
-app.permanent_session_lifetime = timedelta(minutes=10)
+# app.permanent_session_lifetime = timedelta(minutes=10)
 
 # HomePage
 @app.route("/")

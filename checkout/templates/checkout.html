@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block stylesheet %}
+<link rel='stylesheet' type="text/css" href="{{ url_for('static', filename='stlye.css')}}">
+<link rel='stylesheet' type="text/css" href="{{ url_for('static', filename='cart.css')}}">{% endblock %}
+
+{% block Title %}Cart Page-{% endblock %}
+
+{%block content %}
+<div class="Cart-Container"></div>
+<div class="Header">
+    <h3 class="Heading">Your Items: </h3>
+    <div class="cart">
+        <div class="items">
+            {% for item in cart %}
+            <div class="item">
+                <div class="image">
+                    <img src="{{ item.image }}">
+                </div>
+                <div class="content">
+                    <div class="name">
+                        {{ item.name }}
+                    </div>
+                    <div class="metadata">
+                        {% for key, value in item.metadata.items() %}
+                        <div class="metaEl">
+                            <label for="{{ key }}"> {{ key }}</label>
+                            <div> {{ value }} </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <div class="price"> Rs.{{item.price}}</div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="counter"> {{ cart | length }} Items </div>
+        <div class="prices"> Rs.{{ cart | sum(attribute="price")}}</div>
+        <div class="buy"> <input class='button' type='submit'></div>
+    </div>
+</div>
+{% endblock %}

@@ -1,3 +1,4 @@
+from multiprocessing import connection
 from flask import Blueprint, render_template, current_app, session, url_for
 
 from utils.db_queries import get_cart
@@ -18,3 +19,13 @@ def cartpage():
         "cartpage.html", cart=get_cart(connection, session["username"]),
         homepage_link = url_for('home')
     )
+
+@cartpage_blueprint.route("/checkout")
+def checkout():
+    # mysql connection
+    mysql = current_app.config["mysql"]
+    connection = mysql.connection
+    
+    return render_template("checkout.html",
+                            cart=get_cart(connection, session["username"]),
+                            homepage_link = url_for('home'))

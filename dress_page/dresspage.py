@@ -1,5 +1,5 @@
 from flask import Blueprint, flash, render_template, current_app, request, session, url_for
-from itsdangerous import json
+import json
 
 from utils.db_queries import add_to_cart, getDress
 from utils.img_host import get_file
@@ -24,6 +24,7 @@ def dresspage(dressid):
 
     img_path = dress_info["img_url"]
     img_path = get_file(img_path)
+    print(dress_info["metadata"])
     metadata = json.loads(dress_info["metadata"])
     return render_template(
         "dresspage.html",

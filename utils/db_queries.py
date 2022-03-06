@@ -1,4 +1,9 @@
+from flask import url_for
+from importlib_metadata import metadata
+import json
 import mysql.connector as mysql
+
+from utils.img_host import get_file
 
 # User related DB functions
 def add_user(conn: mysql.connection, username, email, password, account_tpye):
@@ -53,7 +58,9 @@ def deleteuser(conn: mysql.connection, id):
 
 # Dress related DB functions
 
-dress_keys = ['id', 'name', 'description', 'img_url', 'price', 'stock', 'metadata']
+dress_keys = ["id", "name", "description", "img_url", "price", "stock", "metadata"]
+
+
 def getDress(conn: mysql.connection, id):
     cursor = conn.cursor()
     query = f"SELECT * FROM dress WHERE dressid={id}"
@@ -69,9 +76,11 @@ def searchDress(conn: mysql.connection, search_term):
     return cursor.fetchall()
 
 
-def add_dress(conn: mysql.connection, name, description, img_url, price, stock, metadata):
+def add_dress(
+    conn: mysql.connection, name, description, img_url, price, stock, metadata
+):
     cursor = conn.cursor()
-    query = f'INSERT INTO dress (name,description,img_url,price,stock, metadata) VALUES("{name}","{description}","{img_url}","{price}","{stock}", "{metadata})'
+    query = f'INSERT INTO dress (name,description,img_url,price,stock, metadata) VALUES("{name}","{description}","{img_url}","{price}","{stock}", \'{metadata}\')'
 
     cursor.execute(query)
     conn.commit()
@@ -92,10 +101,52 @@ def del_dress(conn: mysql.connection, id):
     cursor.execute(query)
     conn.commit()
 
+
 def add_to_cart(conn: mysql.connection, userid, dressid, metadata):
     cursor = conn.cursor()
-    query = f'INSERT INTO cart (customer_id, dressid, metadata) VALUES("{userid}","{dressid}","{metadata}")'
+    print("metadata", metadata, json.dumps(metadata))
+    query = f'INSERT INTO cart (customer_id, dressid, metadata) VALUES("{userid}","{dressid}",\'{json.dumps(metadata)}\')'
 
     cursor.execute(query)
     conn.commit()
-    
+
+
+cart_keys = ["cart_id", "customer_id", "dress_id", "metadata"]
+
+
+def get_cart(conn: mysql.connection, userid):
+    cursor = conn.cursor()
+    query = f'SELECT * FROM cart WHERE customer_id="{userid}"'
+    cursor.execute(query)
+    cart = list(map(lambda x: dict(zip(cart_keys, x)), cursor.fetchall()))
+    dress_ids = list(map(lambda x: x["dress_id"], cart))
+    cursor.execute(
+        f"SELECT metadata, dressid, img_url,name,price FROM dress WHERE dressid IN ({ (','.join(map(str, dress_ids))) });"
+    )
+    metadata = {}
+    metadatas = cursor.fetchall()
+    list(map(lambda x: assign(x, metadata), metadatas))
+    for i in range(len(cart)):
+        item = cart[i]
+        meta = metadata[item["dress_id"]]["metadata"]
+        metameta = json.loads(item["metadata"])
+        for j in metameta:
+            meta[j] = metameta[j]
+        cart[i]["metadata"] = meta
+        cart[i]["image"] = url_for(
+            ".static", filename=get_file(metadata[item["dress_id"]]["image"])
+        )
+        cart[i]["name"] = metadata[item["dress_id"]]["name"]
+        cart[i]["price"] = metadata[item["dress_id"]]["price"]
+
+    return cart
+
+
+def assign(x, metadata):
+    metadata[x[1]] = {
+        "metadata": json.loads(x[0]),
+        "dressid": x[1],
+        "image": x[2],
+        "name": x[3],
+        "price": x[4],
+    }

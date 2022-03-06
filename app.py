@@ -115,6 +115,14 @@ def profile():
 
 @app.route("/searchresult/", methods=["GET", "POST"])
 def search():
+<<<<<<< HEAD
+    """ The page which the user will be redirected to when searching """
+
+    if request.method == 'POST':
+        search_term = request.form['Search']
+        return redirect(url_for('home', searchterm=search_term))    
+    
+=======
     """The page which the user will be redirected to when searching"""
 
     if request.method == "POST":
@@ -122,6 +130,7 @@ def search():
         print(search_term)
         return redirect(url_for("home", search=search_term))
 
+>>>>>>> 4cb10139f5a87eb3426c4746d68b839e01d9e9bc
     else:
         return redirect(url_for("home"))
 

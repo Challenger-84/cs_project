@@ -55,6 +55,14 @@ def deleteuser(conn: mysql.connection, id):
     conn.commit()
 
 
+def get_userinfo(conn: mysql.connection, username):
+    cursor = conn.cursor()
+    query = f"SELECT * FROM users WHERE username='{username}'"
+    cursor.execute(query)
+
+    return cursor.fetchone()
+
+
 # Dress related DB functions
 
 dress_keys = ["id", "name", "description", "img_url", "price", "stock", "metadata"]
@@ -64,7 +72,10 @@ def getDress(conn: mysql.connection, id):
     cursor = conn.cursor()
     query = f"SELECT * FROM dress WHERE dressid={id}"
     cursor.execute(query)
-    return dict(zip(dress_keys, cursor.fetchone()))
+    dress = cursor.fetchone()
+    if dress is None:
+        return None
+    return dict(zip(dress_keys, dress))
 
 
 def searchDress(conn: mysql.connection, search_term):
@@ -101,9 +112,9 @@ def del_dress(conn: mysql.connection, id):
     conn.commit()
 
 
-def add_to_cart(conn: mysql.connection, userid, dressid, metadata):
+def add_to_cart(conn: mysql.connection, username, dressid, metadata):
     cursor = conn.cursor()
-    query = f'INSERT INTO cart (customer_id, dressid, metadata) VALUES("{userid}","{dressid}",\'{json.dumps(metadata)}\')'
+    query = f'INSERT INTO cart (customer_id, dressid, metadata) VALUES((SELECT userid FROM users WHERE username="{username}"),"{dressid}",\'{json.dumps(metadata)}\')'
 
     cursor.execute(query)
     conn.commit()
@@ -112,12 +123,15 @@ def add_to_cart(conn: mysql.connection, userid, dressid, metadata):
 cart_keys = ["cart_id", "customer_id", "dress_id", "metadata"]
 
 
-def get_cart(conn: mysql.connection, userid):
+def get_cart(conn: mysql.connection, username):
     cursor = conn.cursor()
-    query = f'SELECT * FROM cart WHERE customer_id="{userid}"'
+    query = f"SELECT * FROM cart WHERE customer_id=(SELECT userid FROM users WHERE username='{username}')"
     cursor.execute(query)
     cart = list(map(lambda x: dict(zip(cart_keys, x)), cursor.fetchall()))
     dress_ids = list(map(lambda x: x["dress_id"], cart))
+    if len(dress_ids) == 0:
+        return []
+    print(cart)
     cursor.execute(
         f"SELECT metadata, dressid, img_url,name,price FROM dress WHERE dressid IN ({ (','.join(map(str, dress_ids))) });"
     )
@@ -138,6 +152,19 @@ def get_cart(conn: mysql.connection, userid):
         cart[i]["price"] = metadata[item["dress_id"]]["price"]
 
     return cart
+
+
+def del_cart(conn: mysql.connection, username, delete=False):
+    cursor = conn.cursor()
+    cursor.execute(f'SELECT userid from users WHERE username="{username}"')
+    userid = int(cursor.fetchone()[0])
+
+    if delete:
+        cursor.execute(f"DELETE FROM cart WHERE customer_id={userid} AND checked_out=0")
+        conn.commit()
+    else:
+        cursor.execute(f"UPDATE cart SET checked_out=1 WHERE customer_id={userid}")
+        conn.commit()
 
 
 def assign(x, metadata):

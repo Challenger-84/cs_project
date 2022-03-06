@@ -10,11 +10,10 @@
 <h2>ADD NEW DRESS</h2>
 <div class="formContainer">
     <form action="#" method="POST" enctype="multipart/form-data">
-        <label>Dress Name: </label><br>
-        <input type='text' class='TextBox' placeholder="Name" name="name"><br>
-        <label>Description: </label><br>
-        <textarea class='DescBox' placeholder="Description" maxlength="200" name='description'>
-            </textarea><br>
+        <label>Dress Name: </label>
+        <input type='text' class='TextBox' placeholder="Name" name="name">
+        <label>Description: </label>
+        <textarea class='DescBox' placeholder="Description" maxlength="200" name='description'></textarea>
         <label>Metadata: </label>
         <div class="metaDataBox">
             <div id="metaDataList">
@@ -26,12 +25,12 @@
             </div>
             <button class="button" id="metaDataButton" onclick="addMetaData(event)"> Add Metadata </button>
         </div>
-        <label>Image URL: </label><br>
-        <input type='file' placeholder="Image" name="img_file"><br>
-        <label>Price: </label><br>
-        <input type="number" class='TextBox' name="price" placeholder="Price"><br>
-        <label>Stock: </label><br>
-        <input type='number' class='TextBox' placeholder="Stock" name="stock"><br>
+        <label>Image URL: </label>
+        <input type='file' placeholder="Image" name="img_file">
+        <label>Price: </label>
+        <input type="number" class='TextBox' name="price" placeholder="Price">
+        <label>Stock: </label>
+        <input type='number' class='TextBox' placeholder="Stock" name="stock">
         <input type="submit" class="button center">
     </form>
 </div>
@@ -40,7 +39,7 @@
         e.preventDefault();
         const el = document.getElementById('metaDataList');
         const template = `<div class="metaDataEl">
-                <input type='text' class='TextBox' value="Colour:">:
+                <input type='text' class='TextBox' value="Colour">:
                 <input type='text' class='TextBox' name="colour">
                 <button class="removeMetaData button" onclick="removeMetaData(event)">X</button>
             </div>`
@@ -57,7 +56,6 @@
     }
 
     document.querySelector('form').addEventListener('formdata', e => {
-        console.log('formdata fired');
 
         // modifies the form data
         const formData = e.formData;
@@ -72,9 +70,15 @@
         const metadata = {}
         const elements = [...document.querySelectorAll('.metaDataEl')]
             .map(el => [...el.querySelectorAll('input')].map(el => el.value));
-        elements.map(console.log)
-        for (const [key, value] of elements) {
-            metadata[key] = value;
+        for (let [key, value] of elements) {
+            if (value === '') { alert('Please fill in all metadata fields'); continue; }
+            try {
+                v = JSON.parse(value);
+                if (Array.isArray(v)) value = v
+            } catch (e) {
+                value = value
+            }
+            metadata[key] = value
         }
         formData.set('metadata', JSON.stringify(metadata));
 

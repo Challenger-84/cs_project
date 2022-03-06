@@ -58,8 +58,8 @@
 
 <div class='flex-container'>
     {% for dress in dresses %}
-    <div class="dress-container">
-        <img src={{dress[3]}} alt='Image not found' height=180 width=180>
+    <div class="dress-container" onclick="location.href = '/dresspage/{{dress[0]}}'">
+        <img src={{dress[3]}} alt='Image not found'>
 
         <a href=/dresspage/{{dress[0]}}>
             <h4>{{dress[1]}}</h4>

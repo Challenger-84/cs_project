@@ -4,7 +4,7 @@
 <link rel='stylesheet' type="text/css" href="{{ url_for('static', filename='stlye.css')}}">
 <link rel='stylesheet' type="text/css" href="{{ url_for('static', filename='cart.css')}}">{% endblock %}
 
-{% block Title %}Cart Page-{% endblock %}
+{% block Title %}Cart Page-1{% endblock %}
 
 {%block content %}
 <div class="Cart-Container"></div>
@@ -33,10 +33,22 @@
                     <div class="price"> Rs.{{item.price}}</div>
                 </div>
             </div>
+            {% else %}
+            <div class="item">
+                <div class="content">
+                    <div class="name">
+                        No items in cart
+                    </div>
+                </div>
+            </div>
             {% endfor %}
         </div>
         <div class="counter"> {{ cart | length }} Items </div>
         <div class="prices"> Rs.{{ cart | sum(attribute="price")}}</div>
+        <div class="buy">
+            <form action='#' method='post'>
+                <button class='button'> Pay and Purchase </button>
+        </div>
     </div>
 </div>
 {% endblock %}

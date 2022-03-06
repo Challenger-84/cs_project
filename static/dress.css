@@ -5,6 +5,9 @@ form {
 	flex-direction: column;
 }
 
+.img {
+	height: 180px;
+}
 .metaDataEl {
 	display: grid;
 	width: 100%;

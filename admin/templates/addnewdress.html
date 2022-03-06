@@ -80,13 +80,13 @@
 
     });
 </script>
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for message in messages %}
 <div id='flash_msg'>
-    {% with messages = get_flashed_messages() %}
-    {% if messages %}
-    {% for message in messages %}
     {{ message }}
-    {% endfor %}
-    {% endif %}
-    {% endwith %}
 </div>
+{% endfor %}
+{% endif %}
+{% endwith %}
 {% endblock %}

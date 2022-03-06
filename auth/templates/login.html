@@ -7,30 +7,33 @@
 {% block Title %}Login -{% endblock %}
 
 {% block navbar_buttons %}
-    <li class=navbar-container>
-        <a href={{signup_link}}>
-            <input class="button" type="button" value="Signup">
-        </a>
-    </li>
+<li class=navbar-container>
+    <a href={{signup_link}}>
+        <input class="button" type="button" value="Signup">
+    </a>
+</li>
 {% endblock %}
 
 {% block content %}
-    <div class='inp_box'>
-        <h1>Login</h1>
-        <form class="flex-container" action='#' method='post'>
-            <input class="textbox" type="text" placeholder="Enter Username" name="username">
-            <input class="textbox" type="password" placeholder="Enter Password" name="password">
-            <input type="submit" class="button">
-        </form>
+<div class='inp_box'>
+    <h1>Login</h1>
+    <form class="flex-container" action='#' method='post'>
+        <input class="textbox" type="text" placeholder="Enter Username" name="username">
+        <input class="textbox" type="password" placeholder="Enter Password" name="password">
+        <input type="submit" class="button">
+    </form>
 
-        <div id=flash_msg>
-            {% with messages = get_flashed_messages() %}
-                {% if messages %}
-                    {% for message in messages %}
-                        {{ message }}
-                    {% endfor %}
-                {% endif %}
-            {% endwith %}
-        </div>
+    {% with messages = get_flashed_messages() %}
+
+    {% if messages %}
+    {% for message in messages %}
+    <div id=flash_msg>
+
+        {{ message }}
     </div>
+
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+</div>
 {% endblock %}

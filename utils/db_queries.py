@@ -1,5 +1,4 @@
 from flask import url_for
-from importlib_metadata import metadata
 import json
 import mysql.connector as mysql
 

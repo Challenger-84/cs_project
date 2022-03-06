@@ -15,5 +15,6 @@ def cartpage():
 
     print(session.items(), get_cart(connection, session["username"]))
     return render_template(
-        "cartpage.html", cart=get_cart(connection, session["username"])
+        "cartpage.html", cart=get_cart(connection, session["username"]),
+        homepage_link = url_for('home')
     )

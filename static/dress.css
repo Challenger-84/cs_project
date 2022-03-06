@@ -1,0 +1,35 @@
+form {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
+.metaDataEl {
+	display: grid;
+	width: 100%;
+	grid-template-columns: 1fr 1fr;
+	gap: 1vw;
+	margin-bottom: 1vh;
+}
+
+.metaDataEl > label:first-child {
+	justify-self: flex-end;
+}
+
+.metaDataEl > select {
+	width: 100%;
+}
+.metaDataEl > label:first-child::after {
+	content: ':';
+}
+
+select {
+	background-color: #00000024;
+	color: white;
+	border-radius: 0.2em;
+}
+
+option  {
+	background-color: #00000087;
+}

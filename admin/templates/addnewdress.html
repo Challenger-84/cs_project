@@ -7,29 +7,86 @@
 {% block Title %} Add New Dress {% endblock %}
 
 {% block content %}
-    <h2>ADD NEW DRESS</h2>
-    <form class='dressbox' action="#" method="POST" enctype="multipart/form-data">
+<h2>ADD NEW DRESS</h2>
+<div class="formContainer">
+    <form action="#" method="POST" enctype="multipart/form-data">
         <label>Dress Name: </label><br>
-        <input type='text' class='TextBox' placeholder="Name" name="dress_name"><br>
+        <input type='text' class='TextBox' placeholder="Name" name="name"><br>
         <label>Description: </label><br>
         <textarea class='DescBox' placeholder="Description" maxlength="200" name='description'>
-        </textarea><br>
+            </textarea><br>
+        <label>Metadata: </label>
+        <div class="metaDataBox">
+            <div id="metaDataList">
+                <div class="metaDataEl">
+                    <input type='text' class='TextBox' name="metadata_key" value="Colour">:
+                    <input type='text' class='TextBox' name="metadata_value">
+                    <button class="removeMetaData button" onclick="removeMetaData(event)">X</button>
+                </div>
+            </div>
+            <button class="button" id="metaDataButton" onclick="addMetaData(event)"> Add Metadata </button>
+        </div>
         <label>Image URL: </label><br>
         <input type='file' placeholder="Image" name="img_file"><br>
         <label>Price: </label><br>
-        <input type="number" class='TextBox' name="Price" placeholder="Price"><br>
+        <input type="number" class='TextBox' name="price" placeholder="Price"><br>
         <label>Stock: </label><br>
         <input type='number' class='TextBox' placeholder="Stock" name="stock"><br>
-        <input style='margin-left: 100px' type="submit" class="button">
+        <input type="submit" class="button center">
     </form>
+</div>
+<script>
+    function addMetaData(e) {
+        e.preventDefault();
+        const el = document.getElementById('metaDataList');
+        const template = `<div class="metaDataEl">
+                <input type='text' class='TextBox' value="Colour:">:
+                <input type='text' class='TextBox' name="colour">
+                <button class="removeMetaData button" onclick="removeMetaData(event)">X</button>
+            </div>`
+        el.appendChild(stringToHTML(template));
+    }
+    function removeMetaData(e) {
+        e.target.parentNode.remove()
+        e.preventDefault();
+    }
+    function stringToHTML(str) {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(str, 'text/html');
+        return doc.body.firstChild;
+    }
 
-    <h5 id=flash_msg>
-        {% with messages = get_flashed_messages() %}
-            {% if messages %}
-                {% for message in messages %}
-                    {{ message }}
-                {% endfor %}
-            {% endif %}
-        {% endwith %}
-    </h5>
+    document.querySelector('form').addEventListener('formdata', e => {
+        console.log('formdata fired');
+
+        // modifies the form data
+        const formData = e.formData;
+
+        while (formData.has('metadata_key')) {
+            formData.delete('metadata_key');
+        }
+        while (formData.has('metadata_value')) {
+            formData.delete('metadata_value');
+        }
+
+        const metadata = {}
+        const elements = [...document.querySelectorAll('.metaDataEl')]
+            .map(el => [...el.querySelectorAll('input')].map(el => el.value));
+        elements.map(console.log)
+        for (const [key, value] of elements) {
+            metadata[key] = value;
+        }
+        formData.set('metadata', JSON.stringify(metadata));
+
+    });
+</script>
+<div id='flash_msg'>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+    {{ message }}
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+</div>
 {% endblock %}

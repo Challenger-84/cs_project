@@ -23,7 +23,7 @@
             <input type="submit" class="button">
         </form>
 
-        <h5 id=flash_msg>
+        <div id=flash_msg>
             {% with messages = get_flashed_messages() %}
                 {% if messages %}
                     {% for message in messages %}
@@ -31,6 +31,6 @@
                     {% endfor %}
                 {% endif %}
             {% endwith %}
-        </h5>
+        </div>
     </div>
 {% endblock %}

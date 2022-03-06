@@ -125,7 +125,7 @@ cart_keys = ["cart_id", "customer_id", "dress_id", "metadata"]
 
 def get_cart(conn: mysql.connection, username):
     cursor = conn.cursor()
-    query = f"SELECT * FROM cart WHERE customer_id=(SELECT userid FROM users WHERE username='{username}')"
+    query = f"SELECT * FROM cart WHERE customer_id=(SELECT userid FROM users WHERE username='{username}') and checked_out=0"
     cursor.execute(query)
     cart = list(map(lambda x: dict(zip(cart_keys, x)), cursor.fetchall()))
     dress_ids = list(map(lambda x: x["dress_id"], cart))

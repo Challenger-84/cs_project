@@ -4,13 +4,6 @@
 {% block stylesheet %}<link rel='stylesheet' type="text/css" href="{{ url_for('static', filename='stlye.css')}}">{% endblock %}
 
 {% block navbar_buttons %}
-    {% if isadmin %}
-    <li class=navbar-container>
-        <a href={{admin_link}}>
-            <input class="button" type="button" value="Admin Page">
-        </a>
-    </li>
-    {% endif %}
     <li class=navbar-container>
         <a href={{cartpage_link}}>
             <img style="margin-top:2px" src="{{url_for('static', filename='images/cart_image.png')}}" alt="Cart Page" height=35>
@@ -21,6 +14,13 @@
             <input class="button" type="button" value="Logout">
         </a>
     </li>
+    {% if isadmin %}
+    <li class=navbar-container>
+        <a href={{admin_link}}>
+            <input class="button" type="button" value="Admin Page">
+        </a>
+    </li>
+    {% endif %}
 {% endblock %}
 
 {% block content %}

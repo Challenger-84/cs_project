@@ -8,13 +8,18 @@ h1{
     font-size: 45px;
 }
 
-.flex-container{
+.auth-flex-container{
     align-self: center;
     align-items: center;
     display: flex;
     justify-content: center;
     flex-direction: column !important;
     width: 300px;
+
+    margin: 3vh 3vw;
+    padding: 3vh 3vw;
+    background-color: #00000020;
+    border-radius: 1em;
 }
 
 .inp_box{

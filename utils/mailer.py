@@ -14,5 +14,5 @@ def send_mail(reciever, subject, body):
         smtp.starttls()
         smtp.ehlo()
         smtp.login(EMAIL_ADDRESS, EMAIL_PASSWORD)
-    msg = f'Subject: {subject}\n\n {body}'
-    smtp.sendmail(EMAIL_ADDRESS, reciever, msg)
+        msg = f'Subject: {subject}\n\n {body}'
+        smtp.sendmail(EMAIL_ADDRESS, reciever, msg)
